@@ -2,9 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 
 Rectangle {
-    width: 1920
-    height: 1080
-    //anchors.fill: parent
+    anchors.fill: parent
     color: "black"
     id: root
 
@@ -69,6 +67,7 @@ Rectangle {
                 radius: 10
             }
             palette.buttonText: hovered ? root.activeTextColor : "white"
+            onClicked: root.visible = false
         }
 
         Button {

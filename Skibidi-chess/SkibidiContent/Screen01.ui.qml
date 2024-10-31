@@ -12,8 +12,8 @@ import Skibidi
 
 Rectangle {
     id: rectangle
-    width: Constants.width
-    height: Constants.height
+    width: Screen.width
+    height: Screen.height
     color: "#302E2B"
 
     Chessboard {
