@@ -1,6 +1,5 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-import SettingsManager 1.0
 
 Rectangle {
     anchors.fill: parent
@@ -103,10 +102,13 @@ Rectangle {
                 radius: 10
             }
             palette.buttonText: hovered ? root.activeTextColor : "white"
+            //onClicked: {GameObj.changeBoard(); quitButton.text = ChessboardObj.getNumOfPieces()}
         }
 
         Button {
             text: "QUIT"
+            //id: quitButton
+            //text: ChessboardObj.getNumOfPieces()
             anchors.horizontalCenter: parent.horizontalCenter
             font.pixelSize: parent.height*0.12
             font.family: "Serif"
@@ -116,7 +118,7 @@ Rectangle {
                 radius: 10
             }
             palette.buttonText: hovered ? root.activeTextColor : "white"
-            onClicked: settingsManager.exit()
+            onClicked: GameObj.closeApp()
         }
     }
 
@@ -128,9 +130,5 @@ Rectangle {
         font.pixelSize: parent.height*0.023
         color:"gray"
         text: qsTr("PlaceHolder")
-    }
-
-    SettingsManager {
-        id: settingsManager
     }
 }

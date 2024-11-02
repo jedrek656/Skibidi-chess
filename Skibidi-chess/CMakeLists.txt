@@ -21,7 +21,10 @@ qt_standard_project_setup()
 
 
 qt_add_executable(${CMAKE_PROJECT_NAME}
-    App/mainmenu.h App/mainmenu.cpp)
+
+    App/game.h App/game.cpp
+    App/chessboard.h App/chessboard.cpp
+    App/chesspiece.h App/chesspiece.cpp)
 qt_add_resources(${CMAKE_PROJECT_NAME} "configuration"
     PREFIX "/"
     FILES

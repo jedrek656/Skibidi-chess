@@ -1,13 +1,21 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
 
 #include "autogen/environment.h"
-#include "mainmenu.h"
+
+#include "game.h"
+#include "chessboard.h"
 
 int main(int argc, char *argv[])
 {
     set_qt_environment();
     QGuiApplication app(argc, argv);
+
+    Game game;
+    ChessBoard chessboard(&game);
+
+    game.setChessboard(&chessboard);
 
     QQmlApplicationEngine engine;
     const QUrl url(mainQmlFile);
@@ -18,11 +26,12 @@ int main(int argc, char *argv[])
                 QCoreApplication::exit(-1);
         }, Qt::QueuedConnection);
 
-    //CONNECTIONS GO FROM HERE
+    //MAKING CLASSES VISIBLE IN QML
 
-    qmlRegisterType<MainMenu>("SettingsManager" ,1 ,0 , "SettingsManager");
+    engine.rootContext()->setContextProperty("GameObj", &game);
+    engine.rootContext()->setContextProperty("ChessboardObj", &chessboard);
 
-    //TO HERE
+
 
     engine.addImportPath(QCoreApplication::applicationDirPath() + "/qml");
     engine.addImportPath(":/");

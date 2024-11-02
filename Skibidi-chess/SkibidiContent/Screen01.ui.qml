@@ -23,14 +23,6 @@ Rectangle {
         width: parent.height * 0.8
         height: parent.height * 0.8
 
-        ChessPiece {
-            id: chessPiece
-            x: 443
-            y: 528
-            width: parent.width / 10
-            height: parent.height / 10
-        }
-
         PossibleMoveCircle {
             id: possibleMoveCircle
             x: 454

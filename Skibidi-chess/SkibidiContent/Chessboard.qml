@@ -26,4 +26,15 @@ Item {
             }
         }
     }
+
+    Repeater {
+        model: 8
+        ChessPiece {
+            required property int index
+            width: root.width / 10
+            height: root.height / 10
+            x: index * root.width / 8
+
+        }
+    }
 }
