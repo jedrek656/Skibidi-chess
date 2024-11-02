@@ -2,8 +2,8 @@
 ### Do not change
 
 set_source_files_properties(Constants.qml
-    PROPERTIES
-        QT_QML_SINGLETON_TYPE true
+	PROPERTIES
+		QT_QML_SINGLETON_TYPE true
 )
 
 
@@ -13,12 +13,10 @@ qt6_add_qml_module(Skibidi
     URI "Skibidi"
     VERSION 1.0
     RESOURCE_PREFIX "/qt/qml"
-    QML_FILES
-        "EventListModel.qml"
-        "EventListSimulator.qml"
-        "Constants.qml"
-    RESOURCES
-        ".qtcreator/project.json"
+	QML_FILES
+		"Constants.qml"
+		"EventListSimulator.qml"
+		"EventListModel.qml"
 )
 
 

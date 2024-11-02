@@ -8,25 +8,25 @@ qt6_add_qml_module(SkibidiContent
     URI "SkibidiContent"
     VERSION 1.0
     RESOURCE_PREFIX "/qt/qml"
-    QML_FILES
-        "Spell.qml"
-        "SettingsButton.qml"
-        "ManaBar.qml"
-        "BrainrotVideo.qml"
-        "MyTimer.qml"
-        "MainMenu.qml"
-        "Screen01.ui.qml"
-        "App.qml"
-        "MenuSettings.qml"
-        "Descripition.qml"
-        "ChessPiece.qml"
-        "Chessboard.qml"
-    RESOURCES
-        "images/skibidi-toilet-original.png"
-        "images/30-MediumToilet.png"
-        "images/NormalToiletImage.png"
-        ".qtcreator/project.json"
-        "fonts/TrajanPro-Regular.ttf"
+	QML_FILES
+		"ChessPiece.qml"
+		"Descripition.qml"
+		"MyTimer.qml"
+		"Spell.qml"
+		"Chessboard.qml"
+		"ManaBar.qml"
+		"BrainrotVideo.qml"
+		"MainMenu.qml"
+		"App.qml"
+		"MenuSettings.qml"
+		"Screen01.ui.qml"
+		"SettingsButton.qml"
+		"PossibleMoveCircle.qml"
+	RESOURCES
+		"fonts/TrajanPro-Regular.ttf"
+		"images/NormalToiletImage.png"
+		"images/skibidi-toilet-original.png"
+		"images/30-MediumToilet.png"
 )
 
 

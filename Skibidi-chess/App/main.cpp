@@ -2,6 +2,7 @@
 #include <QQmlApplicationEngine>
 
 #include "autogen/environment.h"
+#include "mainmenu.h"
 
 int main(int argc, char *argv[])
 {
@@ -16,6 +17,12 @@ int main(int argc, char *argv[])
             if (!obj && url == objUrl)
                 QCoreApplication::exit(-1);
         }, Qt::QueuedConnection);
+
+    //CONNECTIONS GO FROM HERE
+
+    qmlRegisterType<MainMenu>("SettingsManager" ,1 ,0 , "SettingsManager");
+
+    //TO HERE
 
     engine.addImportPath(QCoreApplication::applicationDirPath() + "/qml");
     engine.addImportPath(":/");

@@ -1,5 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import SettingsManager 1.0
 
 Rectangle {
     anchors.fill: parent
@@ -37,13 +38,21 @@ Rectangle {
         source: "images/NormalToiletImage.png"
         fillMode: Image.PreserveAspectFit
     }
+
+    FontLoader{
+        id: trajan
+        source: "fonts/TrajanPro-Regular.ttf"
+    }
+
     Text {
         text: "SKIBIDI CHESS"
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
         anchors.topMargin: parent.height * 0.27
         font.pixelSize: parent.width*0.1
-        font.family: "Trajan Pro"
+        font.family: trajan.font.family
+        font.weight: trajan.font.weight
+        font.styleName: trajan.font.styleName
         //font.family: "Vtks Demolition"
         color: "white"
         font.bold: true
@@ -107,6 +116,7 @@ Rectangle {
                 radius: 10
             }
             palette.buttonText: hovered ? root.activeTextColor : "white"
+            onClicked: settingsManager.exit()
         }
     }
 
@@ -118,5 +128,9 @@ Rectangle {
         font.pixelSize: parent.height*0.023
         color:"gray"
         text: qsTr("PlaceHolder")
+    }
+
+    SettingsManager {
+        id: settingsManager
     }
 }
