@@ -24,7 +24,8 @@ qt_add_executable(${CMAKE_PROJECT_NAME}
 
     App/game.h App/game.cpp
     App/chessboard.h App/chessboard.cpp
-    App/chesspiece.h App/chesspiece.cpp)
+    chesspiece.h chesspiece.cpp
+)
 qt_add_resources(${CMAKE_PROJECT_NAME} "configuration"
     PREFIX "/"
     FILES

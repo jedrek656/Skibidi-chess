@@ -28,7 +28,7 @@ Item {
     }
 
     Repeater {
-        model: 8
+        model: ChessboardObj.getNumOfPieces()
         ChessPiece {
             required property int index
             width: root.width / 10
