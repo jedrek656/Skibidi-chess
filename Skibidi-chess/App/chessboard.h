@@ -2,9 +2,9 @@
 #define CHESSBOARD_H
 
 #include <QObject>
-#include "chesspiece.h"
+#include <QVariantList>
 
-using pieceInfo = std::tuple<QString, int, int, bool>;
+#include "chesspiece.h"
 
 class ChessBoard : public QObject
 {
@@ -14,12 +14,13 @@ public:
 
 public slots:
     int getNumOfPieces();
-    pieceInfo getPiece(int index);
+    QVariantList getPiece(int index);
+    std::vector<std::vector<int>> getPossibleMoves(int index);
 
 signals:
 
 private:
-    QVector<std::unique_ptr<ChessPiece>> pieces;
+    std::vector <std::unique_ptr<ChessPiece>> pieces;
     void loadDefaultPosition();
 };
 

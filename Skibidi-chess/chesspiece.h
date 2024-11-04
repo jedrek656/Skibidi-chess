@@ -1,18 +1,23 @@
 #ifndef CHESSPIECE_H
 #define CHESSPIECE_H
 
-#import <QObject>
+#include <QObject>
+#include <QVariantList>
 
-using pieceInfo = std::tuple<QString, int, int, bool>;
+using possibleMoves = std::vector<std::vector<int>>;
 
 class ChessPiece
 {
+protected:
+    using piecesVector = std::vector<std::unique_ptr<ChessPiece>>;
+
 public:
     ChessPiece(int posX, int posY, bool isWhite);
-    pieceInfo getPieceDate();
+    QVariantList getPieceData();
+    virtual possibleMoves getPossibleMoves(piecesVector const &pieces);
 
-private:
-    QString name = "Piece";
+protected:
+    QString name;
     int posX;
     int posY;
     bool isWhite;

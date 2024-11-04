@@ -22,14 +22,6 @@ Rectangle {
         x: 0.02 * parent.width
         width: parent.height * 0.8
         height: parent.height * 0.8
-
-        PossibleMoveCircle {
-            id: possibleMoveCircle
-            x: 454
-            y: 450
-            width: parent.width / 15
-            height: parent.height / 15
-        }
     }
 
     MyTimer {

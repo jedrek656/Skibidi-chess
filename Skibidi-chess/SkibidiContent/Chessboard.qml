@@ -30,11 +30,37 @@ Item {
     Repeater {
         model: ChessboardObj.getNumOfPieces()
         ChessPiece {
+            id: chessPiece
             required property int index
+            property var pieceData: ChessboardObj.getPiece(index)
             width: root.width / 10
             height: root.height / 10
-            x: index * root.width / 8
+            name: pieceData[0]
+            x: pieceData[1] * root.width / 8 + (root.width / 16 - width / 2)
+            y: pieceData[2] * root.height / 8 + (root.height / 16 - height / 2)
+            Button{
+                anchors.fill: parent
+                background: Rectangle{color: Qt.rgba(0,0,0,0)}
+                onClicked: {
+                    var possibleMoves = ChessboardObj.getPossibleMoves(index)
+                    console.log(possibleMoves)
+                    possibleMovesRepeater.possibleMoves = possibleMoves
+                    possibleMovesRepeater.model = possibleMoves.length
+                }
+            }
+        }
+    }
 
+    Repeater {
+        id: possibleMovesRepeater
+        property variant possibleMoves
+        model: 0
+        PossibleMoveCircle{
+            required property int index
+            width: root.width / 14
+            height: root.height / 14
+            x: possibleMovesRepeater.possibleMoves[index][0] * root.width / 8  + (root.width / 16 - width / 2)
+            y: possibleMovesRepeater.possibleMoves[index][1] * root.height / 8 + (root.height / 16 - height / 2)
         }
     }
 }

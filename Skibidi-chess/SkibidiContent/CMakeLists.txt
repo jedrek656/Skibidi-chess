@@ -28,5 +28,3 @@ qt6_add_qml_module(SkibidiContent
 		"images/skibidi-toilet-original.png"
 		"images/30-MediumToilet.png"
 )
-
-
