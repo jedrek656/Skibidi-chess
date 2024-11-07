@@ -4,6 +4,7 @@ import QtQuick.Controls
 Rectangle {
 
     property string name: "Pawn"
+    property bool isWhite: true;
 
     id: root
     width: 200
@@ -14,8 +15,10 @@ Rectangle {
         height: 0.8 * root.height
         x: 0.1 * root.width
         y: 0.1 * root.height
+        color: root.isWhite ? "white" : "black"
         Text{
-            text: name
+            text: root.name
+            color: root.isWhite ? "black" : "white"
             anchors.fill: parent
             verticalAlignment: Text.AlignVCenter
             font.pointSize: 100

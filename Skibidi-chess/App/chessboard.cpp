@@ -12,7 +12,7 @@ ChessBoard::ChessBoard(QObject *parent, QString position)
 void ChessBoard::loadDefaultPosition() {
     for (int i=0; i<2; ++i){
         for(int j=0; j<8; ++j){
-            pieces.push_back(std::make_unique<Pawn>(j, i, true));
+            pieces.push_back(std::make_unique<Pawn>(j, i, false));
         }
     }
 }
@@ -25,7 +25,6 @@ QVariantList ChessBoard::getPiece(int index){
     return pieces[index]->getPieceData();
 }
 
-std::vector<std::vector<int>> ChessBoard::getPossibleMoves(int index)
-{
+std::vector<std::vector<int>> ChessBoard::getPossibleMoves(int index){
     return pieces[index]->getPossibleMoves(this->pieces);
 }

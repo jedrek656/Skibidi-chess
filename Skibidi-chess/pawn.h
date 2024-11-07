@@ -7,7 +7,7 @@ class Pawn : public ChessPiece
 {
 public:
     Pawn(int posX, int posY, bool isWhite);
-    possibleMoves getPossibleMoves(piecesVector const &pieces) override;
+    possibleMoves getPossibleMoves(piecesVector const &pieces) const override;
 };
 
 #endif // PAWN_H

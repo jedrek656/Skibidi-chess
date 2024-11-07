@@ -4,23 +4,29 @@ Pawn::Pawn(int posX, int posY, bool isWhite) : ChessPiece::ChessPiece(posX, posY
     this->name = "Pawn";
 }
 
-possibleMoves Pawn::getPossibleMoves(piecesVector const &pieces) {
+possibleMoves Pawn::getPossibleMoves(piecesVector const &pieces) const {
     possibleMoves result;
 
     if(this->isWhite){
-        /*for (auto &&piece : pieces){
-
-        }*/
-        result.push_back(std::vector<int>() = {posX, posY + 1});
-        result.push_back(std::vector<int>() = {posX, posY + 2});
+        int maxReach = 2;
+        for (auto &&piece : pieces){
+            if(piece->getPosY() == this->getPosY() - 2) {maxReach = 1;}
+            if(piece->getPosY() == this->getPosY() - 1) {maxReach = 0;}
+        }
+        for (int i = 1; i < maxReach + 1; ++i){
+            result.push_back(std::vector<int>() = {posX, posY - i});
+        }
     }
 
     else{
-        /*for (auto &&piece : pieces){
-
-        }*/
-        result.push_back(std::vector<int>() = {posX, posY - 1});
-        result.push_back(std::vector<int>() = {posX, posY - 2});
+        int maxReach = 2;
+        for (auto &&piece : pieces){
+            if(piece->getPosY() == this->getPosY() + 2) {maxReach = 1;}
+            if(piece->getPosY() == this->getPosY() + 1) {maxReach = 0;}
+        }
+        for (int i = 1; i < maxReach + 1; ++i){
+            result.push_back(std::vector<int>() = {posX, posY + i});
+        }
     }
     return result;
 }
