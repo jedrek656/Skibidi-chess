@@ -33,3 +33,8 @@ int ChessPiece::getPosY() const
 {
     return posY;
 }
+
+bool ChessPiece::getIsWhite() const
+{
+    return isWhite;
+}

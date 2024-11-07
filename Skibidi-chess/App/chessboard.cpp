@@ -15,6 +15,7 @@ void ChessBoard::loadDefaultPosition() {
             pieces.push_back(std::make_unique<Pawn>(j, i, false));
         }
     }
+    pieces.push_back(std::make_unique<Pawn>(4, 2, true));
 }
 
 int ChessBoard::getNumOfPieces(){

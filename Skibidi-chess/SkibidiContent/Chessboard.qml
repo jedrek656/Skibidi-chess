@@ -45,7 +45,7 @@ Item {
                 onClicked: {
                     var possibleMoves = ChessboardObj.getPossibleMoves(index)
                     possibleMovesRepeater.possibleMoves = possibleMoves
-                    possibleMovesRepeater.model = possibleMoves.length
+                    //possibleMovesRepeater.model = possibleMoves.length
                 }
             }
         }
@@ -53,8 +53,8 @@ Item {
 
     Repeater {
         id: possibleMovesRepeater
-        property variant possibleMoves
-        model: 0
+        property variant possibleMoves: []
+        model: possibleMoves.length
         PossibleMoveCircle{
             required property int index
             width: root.width / 14

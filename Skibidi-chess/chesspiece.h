@@ -5,6 +5,11 @@
 #include <QVariantList>
 
 using possibleMoves = std::vector<std::vector<int>>;
+enum moveType{
+    move = 0,
+    capture = 1
+};
+
 
 class ChessPiece
 {
@@ -14,10 +19,12 @@ protected:
 public:
     ChessPiece(int posX, int posY, bool isWhite);
     QVariantList getPieceData() const;
-    void moveTo(int newPosX, int newPosY);
+    virtual void moveTo(int newPosX, int newPosY);
     virtual possibleMoves getPossibleMoves(piecesVector const &pieces) const;
     int getPosX() const;
     int getPosY() const;
+
+    bool getIsWhite() const;
 
 protected:
     QString name;
