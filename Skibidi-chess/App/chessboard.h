@@ -16,6 +16,8 @@ public slots:
     int getNumOfPieces();
     QVariantList getPiece(int index);
     std::vector<std::vector<int>> getPossibleMoves(int index);
+    void movePiece(int pieceIdx, int newPosX, int newPosY);
+    void capturePiece(int pieceIdx, int newPosX, int newPosY);
 
 signals:
 

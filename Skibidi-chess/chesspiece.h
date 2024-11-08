@@ -18,7 +18,7 @@ protected:
 
 public:
     ChessPiece(int posX, int posY, bool isWhite);
-    QVariantList getPieceData() const;
+    virtual QVariantList getPieceData() const;
     virtual void moveTo(int newPosX, int newPosY);
     virtual possibleMoves getPossibleMoves(piecesVector const &pieces) const;
     int getPosX() const;

@@ -29,3 +29,13 @@ QVariantList ChessBoard::getPiece(int index){
 std::vector<std::vector<int>> ChessBoard::getPossibleMoves(int index){
     return pieces[index]->getPossibleMoves(this->pieces);
 }
+
+void ChessBoard::movePiece(int pieceIdx, int newPosX, int newPosY)
+{
+    return;
+}
+
+void ChessBoard::capturePiece(int pieceIdx, int newPosX, int newPosY)
+{
+    return;
+}
