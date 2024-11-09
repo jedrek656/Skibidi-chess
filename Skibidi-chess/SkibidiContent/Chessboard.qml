@@ -28,6 +28,7 @@ Item {
     }
 
     Repeater {
+        id: chessPiecesRepeater
         model: ChessboardObj.getNumOfPieces()
         ChessPiece {
             id: chessPiece
@@ -45,7 +46,7 @@ Item {
                 onClicked: {
                     var possibleMoves = ChessboardObj.getPossibleMoves(index)
                     possibleMovesRepeater.possibleMoves = possibleMoves
-                    //possibleMovesRepeater.model = possibleMoves.length
+                    possibleMovesRepeater.activePiece = index
                 }
             }
         }
@@ -54,6 +55,7 @@ Item {
     Repeater {
         id: possibleMovesRepeater
         property variant possibleMoves: []
+        property int activePiece: -1
         model: possibleMoves.length
         PossibleMoveCircle{
             required property int index
@@ -61,6 +63,16 @@ Item {
             height: root.height / 14
             x: possibleMovesRepeater.possibleMoves[index][0] * root.width / 8  + (root.width / 16 - width / 2)
             y: possibleMovesRepeater.possibleMoves[index][1] * root.height / 8 + (root.height / 16 - height / 2)
+            Button{
+                anchors.fill: parent
+                background: Rectangle{color: Qt.rgba(0,0,0,0)}
+                onClicked: {
+                    ChessboardObj.movePiece(possibleMovesRepeater.activePiece, possibleMovesRepeater.possibleMoves[index][0], possibleMovesRepeater.possibleMoves[index][1])
+                    possibleMovesRepeater.activePiece = -1
+                    possibleMovesRepeater.possibleMoves = []
+                    chessPiecesRepeater.model = ChessboardObj.getNumOfPieces()
+                }
+            }
         }
     }
 }

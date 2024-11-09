@@ -32,10 +32,13 @@ std::vector<std::vector<int>> ChessBoard::getPossibleMoves(int index){
 
 void ChessBoard::movePiece(int pieceIdx, int newPosX, int newPosY)
 {
+    this->pieces[pieceIdx]->moveTo(newPosX, newPosY);
+    emit changePlayer();
     return;
 }
 
 void ChessBoard::capturePiece(int pieceIdx, int newPosX, int newPosY)
 {
+    emit changePlayer();
     return;
 }

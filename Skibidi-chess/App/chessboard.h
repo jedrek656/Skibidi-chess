@@ -20,6 +20,7 @@ public slots:
     void capturePiece(int pieceIdx, int newPosX, int newPosY);
 
 signals:
+    void changePlayer();
 
 private:
     std::vector <std::unique_ptr<ChessPiece>> pieces;
