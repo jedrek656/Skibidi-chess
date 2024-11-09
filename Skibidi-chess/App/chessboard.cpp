@@ -1,5 +1,6 @@
 #include "chessboard.h"
 #include "pawn.h"
+#include <QDebug>
 
 ChessBoard::ChessBoard(QObject *parent, QString position)
     : QObject{parent}
@@ -32,7 +33,9 @@ std::vector<std::vector<int>> ChessBoard::getPossibleMoves(int index){
 
 void ChessBoard::movePiece(int pieceIdx, int newPosX, int newPosY)
 {
+    qDebug() << this->getPiece(pieceIdx);
     this->pieces[pieceIdx]->moveTo(newPosX, newPosY);
+    qDebug() << this->getPiece(pieceIdx);
     emit changePlayer();
     return;
 }

@@ -49,5 +49,6 @@ possibleMoves Pawn::getPossibleMoves(piecesVector const &pieces) const {
 }
 
 void Pawn::moveTo(int newPosX, int newPosY) {
+    ChessPiece::moveTo(newPosX, newPosY);
     this->isFirstMove = false;
 }

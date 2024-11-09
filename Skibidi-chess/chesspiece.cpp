@@ -14,7 +14,7 @@ QVariantList ChessPiece::getPieceData() const
 
 void ChessPiece::moveTo(int newPosX, int newPosY)
 {
-    Q_ASSERT(newPosX < 9 && newPosY < 9 && newPosX > -1 && newPosY > -1);
+    Q_ASSERT(newPosX < 8 && newPosY < 8 && newPosX > -1 && newPosY > -1);
     this->posX = newPosX;
     this->posY = newPosY;
 }

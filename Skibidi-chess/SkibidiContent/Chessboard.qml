@@ -67,12 +67,27 @@ Item {
                 anchors.fill: parent
                 background: Rectangle{color: Qt.rgba(0,0,0,0)}
                 onClicked: {
-                    ChessboardObj.movePiece(possibleMovesRepeater.activePiece, possibleMovesRepeater.possibleMoves[index][0], possibleMovesRepeater.possibleMoves[index][1])
-                    possibleMovesRepeater.activePiece = -1
-                    possibleMovesRepeater.possibleMoves = []
-                    chessPiecesRepeater.model = ChessboardObj.getNumOfPieces()
+                    if (possibleMovesRepeater.activePiece != -1){
+                        if(possibleMovesRepeater.possibleMoves[index][2]) {
+                            ChessboardObj.capturePiece(possibleMovesRepeater.activePiece, possibleMovesRepeater.possibleMoves[index][0], possibleMovesRepeater.possibleMoves[index][1])
+                        }
+                        else{
+                            ChessboardObj.movePiece(possibleMovesRepeater.activePiece, possibleMovesRepeater.possibleMoves[index][0], possibleMovesRepeater.possibleMoves[index][1])
+                        }
+                        possibleMovesRepeater.activePiece = -1
+                        possibleMovesRepeater.possibleMoves = []
+
+                    }
                 }
             }
+        }
+    }
+
+    Connections{
+        target: ChessboardObj
+        function onChangePlayer() {
+            chessPiecesRepeater.model = 0
+            chessPiecesRepeater.model = ChessboardObj.getNumOfPieces()
         }
     }
 }
