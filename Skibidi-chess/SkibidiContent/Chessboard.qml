@@ -29,17 +29,20 @@ Item {
 
     Repeater {
         id: chessPiecesRepeater
-        model: ChessboardObj.getNumOfPieces()
+        model: ChessboardObj
         ChessPiece {
             id: chessPiece
-            required property int index
-            property var pieceData: ChessboardObj.getPiece(index)
+            required property string nameProperty
+            required property int posX
+            required property int posY
+            required property bool isWhiteProperty
+            required property string index
             width: root.width / 10
             height: root.height / 10
-            name: pieceData[0]
-            isWhite: pieceData[3]
-            x: pieceData[1] * root.width / 8 + (root.width / 16 - width / 2)
-            y: pieceData[2] * root.height / 8 + (root.height / 16 - height / 2)
+            name: nameProperty
+            isWhite: isWhiteProperty
+            x: posX * root.width / 8 + (root.width / 16 - width / 2)
+            y: posY * root.height / 8 + (root.height / 16 - height / 2)
             Button{
                 anchors.fill: parent
                 background: Rectangle{color: Qt.rgba(0,0,0,0)}
@@ -83,11 +86,9 @@ Item {
         }
     }
 
-    Connections{
+    /*Connections{
         target: ChessboardObj
         function onChangePlayer() {
-            chessPiecesRepeater.model = 0
-            chessPiecesRepeater.model = ChessboardObj.getNumOfPieces()
         }
-    }
+    }*/
 }

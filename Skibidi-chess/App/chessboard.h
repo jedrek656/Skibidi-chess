@@ -3,27 +3,38 @@
 
 #include <QObject>
 #include <QVariantList>
+#include <QAbstractListModel>
 
 #include "chesspiece.h"
 
-class ChessBoard : public QObject
+class ChessBoard : public QAbstractListModel
 {
     Q_OBJECT
 public:
+    enum ItemRoles {
+        NameRole = Qt::UserRole + 1,
+        PosXRole,
+        PosYRole,
+        IsWhiteRole,
+    };
     explicit ChessBoard(QObject *parent = nullptr, QString position = "default");
 
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    QVariant data(const QModelIndex &idx, int role) const override;
+
+    QHash<int, QByteArray> roleNames() const override;
+
 public slots:
-    int getNumOfPieces();
-    QVariantList getPiece(int index);
     std::vector<std::vector<int>> getPossibleMoves(int index);
-    void movePiece(int pieceIdx, int newPosX, int newPosY);
-    void capturePiece(int pieceIdx, int newPosX, int newPosY);
+    void movePiece(int idx, int newPosX, int newPosY);
+    void capturePiece(int idx, int newPosX, int newPosY);
 
 signals:
     void changePlayer();
 
 private:
     std::vector <std::unique_ptr<ChessPiece>> pieces;
+    void removeItem(int idx);
     void loadDefaultPosition();
 };
 

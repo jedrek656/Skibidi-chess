@@ -3,7 +3,7 @@ import QtQuick.Controls
 
 Rectangle {
 
-    property string name: "Pawn"
+    property string name: "aaa"
     property bool isWhite: true;
 
     id: root
