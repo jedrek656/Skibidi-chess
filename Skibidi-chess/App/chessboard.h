@@ -19,10 +19,11 @@ public:
     };
     explicit ChessBoard(QObject *parent = nullptr, QString position = "default");
 
+    /* REQUIRED METHODS FOR QABSTRACT LIST */
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &idx, int role) const override;
-
     QHash<int, QByteArray> roleNames() const override;
+    /**/
 
 public slots:
     std::vector<std::vector<int>> getPossibleMoves(int index);
