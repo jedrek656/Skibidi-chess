@@ -75,7 +75,7 @@ Rectangle {
                 radius: 10
             }
             palette.buttonText: hovered ? root.activeTextColor : "white"
-            onClicked: root.visible = false
+            onClicked: ChessboardObj.loadDefaultPosition();
         }
 
         Button {
@@ -130,5 +130,12 @@ Rectangle {
         font.pixelSize: parent.height*0.023
         color:"gray"
         text: qsTr("PlaceHolder")
+    }
+
+    Connections{
+        target: ChessboardObj
+        onChessboardLoaded: {
+            root.visible = false;
+        }
     }
 }
