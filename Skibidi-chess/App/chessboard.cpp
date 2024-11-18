@@ -1,5 +1,6 @@
 #include "chessboard.h"
 #include "pawn.h"
+#include "rook.h"
 #include <QDebug>
 
 ChessBoard::ChessBoard(QObject *parent, QString position)
@@ -17,6 +18,7 @@ void ChessBoard::loadDefaultPosition() {
         }
     }
     pieces.push_back(std::make_unique<Pawn>(4, 2, true));
+    pieces.push_back(std::make_unique<Rook>(4, 6, true));
 }
 
 int ChessBoard::rowCount(const QModelIndex &parent) const
