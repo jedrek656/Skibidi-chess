@@ -26,11 +26,10 @@ possibleMoves King::getPossibleMoves(piecesVector const &pieces) const {
         bool isBlocked = false;
         for (const auto& piece : pieces) {
             if (piece->getPosX() == newX && piece->getPosY() == newY) {
-                if (piece->getIsWhite() == this->isWhite) {
-                    isBlocked = true; // Blocked by a friendly piece
-                } else {
-                    result.push_back({newX, newY, moveType::capture}); // Capture opponent piece
+                if (piece->getIsWhite() != this->isWhite) {
+                    result.push_back({newX, newY, moveType::capture});
                 }
+                isBlocked = true;
                 break;
             }
         }

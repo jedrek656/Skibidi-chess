@@ -3,6 +3,8 @@
 #include "rook.h"
 #include "bishop.h"
 #include "queen.h"
+#include "king.h"
+#include "knight.h"
 #include <QDebug>
 
 ChessBoard::ChessBoard(QObject *parent)
@@ -11,15 +13,29 @@ ChessBoard::ChessBoard(QObject *parent)
 }
 
 void ChessBoard::loadDefaultPosition() {
-    for (int i=0; i<2; ++i){
-        for(int j=0; j<8; ++j){
-            //pieces.push_back(std::make_unique<Pawn>(j, i, false));
-            addItem<Pawn>(j, i, false);
-        }
+    for(int j=0; j<8; ++j){
+        addItem<Pawn>(j, 1, false);
+    }
+    for(int j=0; j<8; ++j){
+        addItem<Pawn>(j, 6, true);
     }
 
-    //pieces.push_back(std::make_unique<Pawn>(4, 2, true));
-    addItem<Pawn>(4, 2, true);
+    for(int i = 0; i < 2; ++i){
+        addItem<Rook>(0, i * 7, i);
+        addItem<Rook>(7, i * 7, i);
+
+        addItem<Knight>(1, i * 7, i);
+        addItem<Knight>(6, i * 7, i);
+
+        addItem<Bishop>(2, i * 7, i);
+        addItem<Bishop>(5, i * 7, i);
+
+        addItem<Queen>(3, i * 7, i);
+        addItem<King>(4, i * 7, i);
+    }
+
+
+
 
     emit chessboardLoaded();
 }

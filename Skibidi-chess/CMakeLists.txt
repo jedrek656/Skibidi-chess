@@ -31,6 +31,9 @@ qt_add_executable(${CMAKE_PROJECT_NAME}
     queen.h queen.cpp
     bishop.h bishop.cpp
 
+    knight.h knight.cpp
+    king.h king.cpp
+
 )
 qt_add_resources(${CMAKE_PROJECT_NAME} "configuration"
     PREFIX "/"
