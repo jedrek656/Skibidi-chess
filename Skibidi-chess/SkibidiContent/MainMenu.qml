@@ -75,7 +75,7 @@ Rectangle {
                 radius: 10
             }
             palette.buttonText: hovered ? root.activeTextColor : "white"
-            onClicked: ChessboardObj.loadDefaultPosition();
+            onClicked: ChessboardObj.loadPosition();
         }
 
         Button {

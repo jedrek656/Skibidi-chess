@@ -71,27 +71,44 @@ void ChessBoard::capturePiece(int pieceIdx, int newPosX, int newPosY)
     int toDelIdx = -1;
     int tmpIdx = 0;
     for(auto&& piece: pieces){
-        if(piece->getPosX() == newPosX && piece->getPosY()){
+        if(piece->getPosX() == newPosX && piece->getPosY() == newPosY){
             toDelIdx = tmpIdx;
             break;
         };
         ++tmpIdx;
     }
+
     Q_ASSERT(toDelIdx != -1);
     this->pieces[pieceIdx]->moveTo(newPosX, newPosY);
     emit dataChanged(this->index(pieceIdx), this->index(pieceIdx), {ItemRoles::PosXRole, ItemRoles::PosYRole});
+
     removeItem(toDelIdx);
 
     emit changePlayer();
     return;
 }
 
+void ChessBoard::loadPosition(QString position)
+{
+    clearList();
+    if (position == "default"){
+        loadDefaultPosition();
+    }
+}
+
 void ChessBoard::removeItem(int idx)
 {
-    if (idx < 0 || idx >= pieces.size()) return;
+    Q_ASSERT(idx > 0 && idx < pieces.size());
     beginRemoveRows(QModelIndex(), idx, idx);
     pieces.erase(pieces.begin() + idx);
     endRemoveRows();
+}
+
+void ChessBoard::clearList()
+{
+    beginResetModel();
+    pieces.clear();
+    endResetModel();
 }
 
 template <typename T>
@@ -102,7 +119,7 @@ void ChessBoard::addItem(int posX, int posY, bool isWhite)
     endInsertRows();
 }
 
-std::vector<std::vector<int>> ChessBoard::getPossibleMoves(int index){
+std::vector<std::vector<int>> ChessBoard::getPossibleMoves(int index) const{
     return pieces[index]->getPossibleMoves(this->pieces);
 }
 

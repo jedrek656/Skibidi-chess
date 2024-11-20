@@ -26,10 +26,10 @@ public:
     /**/
 
 public slots:
-    std::vector<std::vector<int>> getPossibleMoves(int index);
+    std::vector<std::vector<int>> getPossibleMoves(int index) const;
     void movePiece(int idx, int newPosX, int newPosY);
     void capturePiece(int idx, int newPosX, int newPosY);
-    void loadDefaultPosition();
+    void loadPosition(QString position = "default");
 
 signals:
     void changePlayer();
@@ -38,9 +38,11 @@ signals:
 private:
     std::vector <std::unique_ptr<ChessPiece>> pieces;
     void removeItem(int idx);
+    void clearList();
 
     template <typename T>
     void addItem(int posX, int posY, bool isWhite);
+    void loadDefaultPosition();
 };
 
 #endif // CHESSBOARD_H
