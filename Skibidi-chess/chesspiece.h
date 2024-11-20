@@ -26,6 +26,8 @@ public:
 
     bool getIsWhite() const;
 
+    operator QString() const;
+
 protected:
     QString name;
     int posX;

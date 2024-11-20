@@ -1,4 +1,5 @@
 #include "chesspiece.h"
+#include <iostream>
 
 ChessPiece::ChessPiece(int posX, int posY, bool isWhite)
 {
@@ -37,4 +38,9 @@ int ChessPiece::getPosY() const
 bool ChessPiece::getIsWhite() const
 {
     return isWhite;
+}
+
+ChessPiece::operator QString() const
+{
+    return this->name + ", " + QString::number(this->posX) + ", " + QString::number(this->posY);
 }

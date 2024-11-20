@@ -21,7 +21,8 @@ Rectangle {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                video.play()
+                //video.play()
+                ChessboardObj.loadPosition();
             }
         }
     }
