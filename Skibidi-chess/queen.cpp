@@ -1,4 +1,4 @@
-/*#include "queen.h"
+#include "queen.h"
 #include "rook.h"
 #include "bishop.h"
 
@@ -15,4 +15,4 @@ possibleMoves Queen::getPossibleMoves(piecesVector const &pieces) const {
     resultH.insert(resultH.end(), resultD.begin(), resultD.end());
     return resultH;
 }
-*/
+

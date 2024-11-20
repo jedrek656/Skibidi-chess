@@ -1,4 +1,4 @@
-/*#ifndef QUEEN_H
+#ifndef QUEEN_H
 #define QUEEN_H
 
 #include "chesspiece.h"
@@ -11,4 +11,4 @@ public:
 };
 
 #endif // QUEEN_H
-*/
+
