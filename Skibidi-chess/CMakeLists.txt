@@ -26,6 +26,10 @@ qt_add_executable(${CMAKE_PROJECT_NAME}
     App/chessboard.h App/chessboard.cpp
     chesspiece.h chesspiece.cpp
     pawn.h pawn.cpp
+    rook.h rook.cpp
+
+    queen.h queen.cpp
+    bishop.h bishop.cpp
 
 )
 qt_add_resources(${CMAKE_PROJECT_NAME} "configuration"

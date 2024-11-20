@@ -1,5 +1,8 @@
 #include "chessboard.h"
 #include "pawn.h"
+#include "rook.h"
+#include "bishop.h"
+#include "queen.h"
 #include <QDebug>
 
 ChessBoard::ChessBoard(QObject *parent)
@@ -14,6 +17,7 @@ void ChessBoard::loadDefaultPosition() {
             addItem<Pawn>(j, i, false);
         }
     }
+
     //pieces.push_back(std::make_unique<Pawn>(4, 2, true));
     addItem<Pawn>(4, 2, true);
 
