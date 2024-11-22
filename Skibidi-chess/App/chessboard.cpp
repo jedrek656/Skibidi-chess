@@ -115,7 +115,7 @@ void ChessBoard::loadPosition(QString position)
 
 void ChessBoard::removeItem(int idx)
 {
-    Q_ASSERT(idx > 0 && idx < pieces.size());
+    Q_ASSERT(idx >= 0 && idx < pieces.size());
     beginRemoveRows(QModelIndex(), idx, idx);
     pieces.erase(pieces.begin() + idx);
     endRemoveRows();

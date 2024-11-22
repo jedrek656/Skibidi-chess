@@ -29,12 +29,25 @@ QHash<int, QByteArray> SpellList::roleNames() const
     return roles;
 }
 
-void SpellList::removeItem(int idx)
+void SpellList::updateLifespans()
 {
-    Q_ASSERT(idx > 0 && idx < spells.size());
+    std::vector<std::unique_ptr<Spell>>::iterator iter;
+    for (iter = spells.begin(); iter != spells.end(); ) {
+        if ((*iter)->decreaseDuration())
+            iter = removeItem(iter);
+        else
+            ++iter;
+    }
+}
+
+vecIterator SpellList::removeItem(vecIterator currIterator)
+{
+    int idx = currIterator - spells.begin();
+    Q_ASSERT(idx >= 0 && idx < spells.size());
     beginRemoveRows(QModelIndex(), idx, idx);
-    spells.erase(spells.begin() + idx);
+    vecIterator newIterator = spells.erase(currIterator);
     endRemoveRows();
+    return newIterator;
 }
 
 void SpellList::clearList()

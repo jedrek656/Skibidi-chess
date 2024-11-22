@@ -5,6 +5,8 @@
 #include <QAbstractListModel>
 #include "spell.h"
 
+using vecIterator = std::vector<std::unique_ptr<Spell>>::iterator;
+
 class SpellList : public QAbstractListModel
 {
     Q_OBJECT
@@ -24,13 +26,16 @@ public:
     QHash<int, QByteArray> roleNames() const override;
     /**/
 
+public slots:
+    void updateLifespans();
+
 
 signals:
 
 private:
     std::vector <std::unique_ptr<Spell>> spells;
 
-    void removeItem(int idx);
+    vecIterator removeItem(vecIterator currIterator);
     void clearList();
 
     template <typename T>
