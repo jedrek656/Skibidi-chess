@@ -33,6 +33,8 @@ qt_add_executable(${CMAKE_PROJECT_NAME}
 
     knight.h knight.cpp
     king.h king.cpp
+    App/spelllist.h App/spelllist.cpp
+    spell.h spell.cpp
 
 )
 qt_add_resources(${CMAKE_PROJECT_NAME} "configuration"

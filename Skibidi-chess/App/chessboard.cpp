@@ -34,9 +34,6 @@ void ChessBoard::loadDefaultPosition() {
         addItem<King>(4, i * 7, i);
     }
 
-
-
-
     emit chessboardLoaded();
 }
 
