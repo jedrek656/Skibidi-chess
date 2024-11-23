@@ -37,11 +37,8 @@ public slots:
 signals:
     void changePlayer();
     void chessboardLoaded();
-<<<<<<< HEAD
     void activePieceChanged();
-=======
     void gameEnd(QString message);
->>>>>>> beda2295f1e06ade69bd0ce32402a5f1955c93b1
 
 private:
 
