@@ -25,6 +25,11 @@ possibleMoves ChessPiece::getPossibleMoves(piecesVector const &pieces) const
     return possibleMoves();
 }
 
+QString ChessPiece::getName() const
+{
+    return name;
+}
+
 int ChessPiece::getPosX() const
 {
     return posX;

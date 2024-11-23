@@ -51,14 +51,14 @@ QVariant ChessBoard::data(const QModelIndex &idx, int role) const
     const QVariantList piece = pieces[idx.row()]->getPieceData();
 
     switch (role) {
-        case NameRole:
-            return piece[0];
-        case ItemRoles::PosXRole:
-            return piece[1];
-        case ItemRoles::PosYRole:
-            return piece[2];
-        case ItemRoles::IsWhiteRole:
-            return piece[3];
+    case NameRole:
+        return piece[0];
+    case ItemRoles::PosXRole:
+        return piece[1];
+    case ItemRoles::PosYRole:
+        return piece[2];
+    case ItemRoles::IsWhiteRole:
+        return piece[3];
     }
 
     return QVariant();
@@ -87,9 +87,13 @@ void ChessBoard::capturePiece(int pieceIdx, int newPosX, int newPosY)
 {
     int toDelIdx = -1;
     int tmpIdx = 0;
+    QString toDelName = "";
+    bool toDelIsWhite = true;
     for(auto&& piece: pieces){
         if(piece->getPosX() == newPosX && piece->getPosY() == newPosY){
             toDelIdx = tmpIdx;
+            toDelName = piece->getName();
+            toDelIsWhite = piece->getIsWhite();
             break;
         };
         ++tmpIdx;
@@ -100,7 +104,16 @@ void ChessBoard::capturePiece(int pieceIdx, int newPosX, int newPosY)
     emit dataChanged(this->index(pieceIdx), this->index(pieceIdx), {ItemRoles::PosXRole, ItemRoles::PosYRole});
 
     removeItem(toDelIdx);
-
+    if(toDelName == "King"){
+        if(toDelIsWhite){
+            emit gameEnd("Black");
+            return;
+        }
+        else{
+            emit gameEnd("White");
+            return;
+        }
+    }
     emit changePlayer();
     return;
 }
@@ -139,9 +152,3 @@ void ChessBoard::addItem(int posX, int posY, bool isWhite)
 std::vector<std::vector<int>> ChessBoard::getPossibleMoves(int index) const{
     return pieces[index]->getPossibleMoves(this->pieces);
 }
-
-
-
-
-
-

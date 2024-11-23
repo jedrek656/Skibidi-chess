@@ -108,6 +108,10 @@ Rectangle {
         height: descripition.width / 3.3
     }
 
+    GameOver{
+        anchors.fill: chessboard
+    }
+
     /*MenuSettings {
         id: menuSettings
         visible: false
