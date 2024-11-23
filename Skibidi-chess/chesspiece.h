@@ -21,6 +21,7 @@ public:
     virtual QVariantList getPieceData() const;
     virtual void moveTo(int newPosX, int newPosY);
     virtual possibleMoves getPossibleMoves(piecesVector const &pieces) const;
+    QString getName() const;
     int getPosX() const;
     int getPosY() const;
 
