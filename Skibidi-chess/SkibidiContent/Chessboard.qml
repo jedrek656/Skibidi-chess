@@ -79,7 +79,6 @@ Item {
                         }
                         possibleMovesRepeater.activePiece = -1
                         possibleMovesRepeater.possibleMoves = []
-
                     }
                 }
             }

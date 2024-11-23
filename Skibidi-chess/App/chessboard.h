@@ -34,6 +34,7 @@ public slots:
 signals:
     void changePlayer();
     void chessboardLoaded();
+    void gameEnd(QString message);
 
 private:
     std::vector <std::unique_ptr<ChessPiece>> pieces;
