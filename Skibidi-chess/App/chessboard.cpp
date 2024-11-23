@@ -113,6 +113,19 @@ void ChessBoard::loadPosition(QString position)
     }
 }
 
+int ChessBoard::getActivePiece() const
+{
+    return activePiece;
+}
+
+void ChessBoard::setActivePiece(int newActivePiece)
+{
+    if (activePiece == newActivePiece)
+        return;
+    activePiece = newActivePiece;
+    emit activePieceChanged();
+}
+
 void ChessBoard::removeItem(int idx)
 {
     Q_ASSERT(idx >= 0 && idx < pieces.size());

@@ -34,7 +34,7 @@ Item {
         onClicked: {
             if (root.isActive == true) {
                 possibleMovesRepeater.possibleMoves = []
-                possibleMovesRepeater.activePiece = -1
+                ChessboardObj.setActivePiece(-1);
                 root.isActive = false
             }
         }
@@ -63,17 +63,17 @@ Item {
                     if (root.isActive == false) {
                         var possibleMoves = ChessboardObj.getPossibleMoves(index)
                         possibleMovesRepeater.possibleMoves = possibleMoves
-                        possibleMovesRepeater.activePiece = index
+                        ChessboardObj.setActivePiece(index);
                         root.isActive = true
                     }
                     else if (possibleMovesRepeater.activePiece != index) {
                         var possibleMoves = ChessboardObj.getPossibleMoves(index)
                         possibleMovesRepeater.possibleMoves = possibleMoves
-                        possibleMovesRepeater.activePiece = index
+                        ChessboardObj.setActivePiece(index);
                     }
                     else {
                         possibleMovesRepeater.possibleMoves = []
-                        possibleMovesRepeater.activePiece = -1
+                        ChessboardObj.setActivePiece(-1);
                         root.isActive = false
                     }
                 }
@@ -84,17 +84,16 @@ Item {
     Repeater {
         id: possibleMovesRepeater
         property variant possibleMoves: []
-        property int activePiece: -1
 
         function move(index) {
-            if (possibleMovesRepeater.activePiece != -1){
+            if (ChessboardObj.getActivePiece() != -1){
                 if(possibleMovesRepeater.possibleMoves[index][2]) {
-                    ChessboardObj.capturePiece(possibleMovesRepeater.activePiece, possibleMovesRepeater.possibleMoves[index][0], possibleMovesRepeater.possibleMoves[index][1])
+                    ChessboardObj.capturePiece(ChessboardObj.getActivePiece(), possibleMovesRepeater.possibleMoves[index][0], possibleMovesRepeater.possibleMoves[index][1])
                 }
                 else{
-                    ChessboardObj.movePiece(possibleMovesRepeater.activePiece, possibleMovesRepeater.possibleMoves[index][0], possibleMovesRepeater.possibleMoves[index][1])
+                    ChessboardObj.movePiece(ChessboardObj.getActivePiece(), possibleMovesRepeater.possibleMoves[index][0], possibleMovesRepeater.possibleMoves[index][1])
                 }
-                possibleMovesRepeater.activePiece = -1
+                ChessboardObj.setActivePiece(-1);
                 possibleMovesRepeater.possibleMoves = []
                 root.isActive = false
             }

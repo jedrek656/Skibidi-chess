@@ -31,11 +31,18 @@ public slots:
     void capturePiece(int idx, int newPosX, int newPosY);
     void loadPosition(QString position = "default");
 
+    int getActivePiece() const;
+    void setActivePiece(int newActivePiece);
+
 signals:
     void changePlayer();
     void chessboardLoaded();
+    void activePieceChanged();
 
 private:
+
+    int activePiece = -1;
+
     std::vector <std::unique_ptr<ChessPiece>> pieces;
     void removeItem(int idx);
     void clearList();
