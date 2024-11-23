@@ -15,8 +15,10 @@ possibleMoves Rook::checkHorizontal(int x, int y, bool is_white, std::vector<std
     for (auto &&piece : pieces) {
         for (int i = 1; i < maxReach[0].first + 1; ++i) {
             if (piece->getPosY() == y && piece->getPosX() == x + i){
-                if (piece->getIsWhite() == is_white)
+                if (piece->getIsWhite() == is_white) {
                     maxReach[0].first = std::min(maxReach[0].first, i);
+                    maxReach[0].second = false;
+                }
                 else {
                     maxReach[0].first = std::min(maxReach[0].first, i + 1);
                     maxReach[0].second = true;
@@ -25,8 +27,10 @@ possibleMoves Rook::checkHorizontal(int x, int y, bool is_white, std::vector<std
         }
         for (int i = 1; i < maxReach[1].first + 1; ++i) {
             if (piece->getPosY() == y && piece->getPosX() == x - i){
-                if (piece->getIsWhite() == is_white)
+                if (piece->getIsWhite() == is_white) {
                     maxReach[1].first = std::min(maxReach[1].first, i);
+                    maxReach[1].second = false;
+                }
                 else {
                     maxReach[1].first = std::min(maxReach[1].first, i + 1);
                     maxReach[1].second = true;
@@ -35,8 +39,10 @@ possibleMoves Rook::checkHorizontal(int x, int y, bool is_white, std::vector<std
         }
         for (int i = 1; i < maxReach[2].first + 1; ++i) {
             if (piece->getPosY() == y + i && piece->getPosX() == x){
-                if (piece->getIsWhite() == is_white)
+                if (piece->getIsWhite() == is_white) {
                     maxReach[2].first = std::min(maxReach[2].first, i);
+                    maxReach[2].second = false;
+                }
                 else {
                     maxReach[2].first = std::min(maxReach[2].first, i + 1);
                     maxReach[2].second = true;
@@ -45,8 +51,10 @@ possibleMoves Rook::checkHorizontal(int x, int y, bool is_white, std::vector<std
         }
         for (int i = 1; i < maxReach[3].first + 1; ++i) {
             if (piece->getPosY() == y - i && piece->getPosX() == x){
-                if (piece->getIsWhite() == is_white)
+                if (piece->getIsWhite() == is_white) {
                     maxReach[3].first = std::min(maxReach[3].first, i);
+                    maxReach[3].second = false;
+                }
                 else {
                     maxReach[3].first = std::min(maxReach[3].first, i + 1);
                     maxReach[3].second = true;
@@ -54,6 +62,7 @@ possibleMoves Rook::checkHorizontal(int x, int y, bool is_white, std::vector<std
             }
         }
     }
+
     for (int i = 1; i < maxReach[0].first; ++i) {
         if (i == maxReach[0].first - 1 && maxReach[0].second == true)
             result.push_back({x + i, y, moveType::capture});

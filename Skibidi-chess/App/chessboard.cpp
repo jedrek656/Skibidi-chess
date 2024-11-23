@@ -34,9 +34,6 @@ void ChessBoard::loadDefaultPosition() {
         addItem<King>(4, i * 7, i);
     }
 
-
-
-
     emit chessboardLoaded();
 }
 
@@ -131,7 +128,7 @@ void ChessBoard::loadPosition(QString position)
 
 void ChessBoard::removeItem(int idx)
 {
-    Q_ASSERT(idx > 0 && idx < pieces.size());
+    Q_ASSERT(idx >= 0 && idx < pieces.size());
     beginRemoveRows(QModelIndex(), idx, idx);
     pieces.erase(pieces.begin() + idx);
     endRemoveRows();
