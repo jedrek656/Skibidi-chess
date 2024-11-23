@@ -66,7 +66,7 @@ Item {
                         ChessboardObj.setActivePiece(index);
                         root.isActive = true
                     }
-                    else if (possibleMovesRepeater.activePiece != index) {
+                    else if (ChessboardObj.getActivePiece() != index) {
                         var possibleMoves = ChessboardObj.getPossibleMoves(index)
                         possibleMovesRepeater.possibleMoves = possibleMoves
                         ChessboardObj.setActivePiece(index);
