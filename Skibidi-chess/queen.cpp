@@ -7,7 +7,7 @@ Queen::Queen(int posX, int posY, bool isWhite) : ChessPiece::ChessPiece(posX, po
     this->name = "Queen";
 }
 
-possibleMoves Queen::getPossibleMoves(piecesVector const &pieces) const {
+possibleMoves Queen::getPossibleMoves(piecesVector const &pieces, int enPassantX) const {
     possibleMoves resultH, resultD;
     resultH = Rook::checkHorizontal(this->getPosX(), this->getPosY(), this->getIsWhite(), pieces);
     resultD = Bishop::checkDiagonal(this->getPosX(), this->getPosY(), this->getIsWhite(), pieces);

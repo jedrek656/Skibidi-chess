@@ -4,7 +4,7 @@ King::King(int posX, int posY, bool isWhite) : ChessPiece::ChessPiece(posX, posY
     this->name = "King";
 }
 
-possibleMoves King::getPossibleMoves(piecesVector const &pieces) const {
+possibleMoves King::getPossibleMoves(piecesVector const &pieces, int enPassantX) const {
     possibleMoves result;
 
     // Offsets for all 8 possible directions

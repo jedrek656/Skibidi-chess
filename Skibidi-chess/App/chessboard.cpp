@@ -77,6 +77,14 @@ QHash<int, QByteArray> ChessBoard::roleNames() const
 void ChessBoard::movePiece(int pieceIdx, int newPosX, int newPosY)
 {
     Q_ASSERT(pieceIdx >= 0 && pieceIdx < pieces.size());
+    enPassantX = -1;
+    if (pieces[pieceIdx]->getName() == "Pawn") {
+        int oldY = pieces[pieceIdx]->getPosY();
+        if (std::abs(newPosY - oldY) == 2) {
+            enPassantX = newPosX;
+        }
+    }
+    qInfo() <<enPassantX<<"\n";
     this->pieces[pieceIdx]->moveTo(newPosX, newPosY);
     emit dataChanged(this->index(pieceIdx), this->index(pieceIdx), {ItemRoles::PosXRole, ItemRoles::PosYRole});
     emit changePlayer();
@@ -114,6 +122,27 @@ void ChessBoard::capturePiece(int pieceIdx, int newPosX, int newPosY)
             return;
         }
     }
+    emit changePlayer();
+    return;
+}
+
+void ChessBoard::enPassant(int pieceIdx, int newPosX, int newPosY)
+{
+    int toDelIdx = -1;
+    int tmpIdx = 0;
+    for(auto&& piece: pieces){
+        if(piece->getPosX() == newPosX && (piece->getPosY() + piece->getIsWhite() * 2 - 1) == newPosY){
+            toDelIdx = tmpIdx;
+            break;
+        };
+        ++tmpIdx;
+    }
+
+    Q_ASSERT(toDelIdx != -1);
+    this->pieces[pieceIdx]->moveTo(newPosX, newPosY);
+    emit dataChanged(this->index(pieceIdx), this->index(pieceIdx), {ItemRoles::PosXRole, ItemRoles::PosYRole});
+
+    removeItem(toDelIdx);
     emit changePlayer();
     return;
 }
@@ -163,5 +192,5 @@ void ChessBoard::addItem(int posX, int posY, bool isWhite)
 }
 
 std::vector<std::vector<int>> ChessBoard::getPossibleMoves(int index) const{
-    return pieces[index]->getPossibleMoves(this->pieces);
+    return pieces[index]->getPossibleMoves(this->pieces, enPassantX);
 }

@@ -7,7 +7,7 @@ class Queen : public ChessPiece
 {
 public:
     Queen(int posX, int posY, bool isWhite);
-    possibleMoves getPossibleMoves(piecesVector const &pieces) const override;
+    possibleMoves getPossibleMoves(piecesVector const &pieces, int enPassantX) const override;
 };
 
 #endif // QUEEN_H

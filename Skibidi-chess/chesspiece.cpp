@@ -20,7 +20,7 @@ void ChessPiece::moveTo(int newPosX, int newPosY)
     this->posY = newPosY;
 }
 
-possibleMoves ChessPiece::getPossibleMoves(piecesVector const &pieces) const
+possibleMoves ChessPiece::getPossibleMoves(piecesVector const &pieces, int enPassantX) const
 {
     return possibleMoves();
 }

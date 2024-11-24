@@ -8,7 +8,7 @@ class Rook : public ChessPiece
 public:
     Rook(int posX, int posY, bool isWhite);
     static possibleMoves checkHorizontal(int x, int y, bool is_white, std::vector<std::unique_ptr<ChessPiece>> const &pieces);
-    possibleMoves getPossibleMoves(piecesVector const &pieces) const override;
+    possibleMoves getPossibleMoves(piecesVector const &pieces, int enPassantX) const override;
 };
 
 #endif // ROOK_H

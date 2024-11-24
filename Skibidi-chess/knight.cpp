@@ -4,7 +4,7 @@ Knight::Knight(int posX, int posY, bool isWhite) : ChessPiece::ChessPiece(posX, 
     this->name = "Knight";
 }
 
-possibleMoves Knight::getPossibleMoves(piecesVector const &pieces) const {
+possibleMoves Knight::getPossibleMoves(piecesVector const &pieces, int enPassantX) const {
     possibleMoves result;
 
     // Offsets for the 8 possible knight moves (2 squares in one direction and 1 square perpendicular)
