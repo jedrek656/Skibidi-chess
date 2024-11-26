@@ -28,9 +28,13 @@ public:
 
 public slots:
     void updateLifespans();
+    void setActiveSpell(int newActiveSpell);
+    int getActiveSpell() const;
+    void test();
 
 
 signals:
+    void activeSpellChanged(int index);
 
 private:
     std::vector <std::unique_ptr<Spell>> spells;
@@ -38,8 +42,10 @@ private:
     vecIterator removeItem(vecIterator currIterator);
     void clearList();
 
+    int activeSpell = -1;
+
     template <typename T>
-    void addItem(int posX, int posY, bool isWhite);
+    void addItem(int posX, int posY);
 };
 
 #endif // SPELLLIST_H

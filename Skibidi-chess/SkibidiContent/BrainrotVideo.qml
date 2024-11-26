@@ -22,7 +22,8 @@ Rectangle {
             anchors.fill: parent
             onClicked: {
                 //video.play()
-                ChessboardObj.loadPosition();
+                //ChessboardObj.loadPosition();
+                SpellListObj.test();
             }
         }
     }

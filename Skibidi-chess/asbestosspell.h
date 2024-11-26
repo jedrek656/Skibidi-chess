@@ -6,7 +6,8 @@
 class AsbestosSpell: public Spell
 {
 public:
-    AsbestosSpell();
+    AsbestosSpell(int posX, int posY);
+    bool isFieldAffected(int posX, int posY) const override;
 };
 
 #endif // ASBESTOSSPELL_H

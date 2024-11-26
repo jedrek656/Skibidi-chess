@@ -142,6 +142,16 @@ Item {
         }
     }
 
+    Repeater{
+        model: SpellListObj
+        Asbestos{
+            width: 3 * root.width / 8
+            height: 3 * root.height / 8
+            x: 4 * root.width/8
+            y: 4 * root.height/8
+        }
+    }
+
     /*Connections{
         target: ChessboardObj
         function onChangePlayer() {

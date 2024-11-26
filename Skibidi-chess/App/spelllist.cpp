@@ -1,4 +1,6 @@
 #include "spelllist.h"
+#include "asbestosspell.h"
+#include <QDebug>
 
 SpellList::SpellList(QObject *parent)
     : QAbstractListModel{parent}
@@ -40,6 +42,11 @@ void SpellList::updateLifespans()
     }
 }
 
+void SpellList::test()
+{
+    addItem<AsbestosSpell>(4, 4);
+}
+
 vecIterator SpellList::removeItem(vecIterator currIterator)
 {
     int idx = currIterator - spells.begin();
@@ -57,10 +64,23 @@ void SpellList::clearList()
     endResetModel();
 }
 
+int SpellList::getActiveSpell() const
+{
+    return activeSpell;
+}
+
+void SpellList::setActiveSpell(int newActiveSpell)
+{
+    if (activeSpell == newActiveSpell)
+        return;
+    activeSpell = newActiveSpell;
+    emit activeSpellChanged(newActiveSpell);
+}
+
 template <typename T>
-void SpellList::addItem(int posX, int posY, bool isWhite)
+void SpellList::addItem(int posX, int posY)
 {
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
-    /*spells.push_back(std::make_unique<T>(T { ... }));*/
+    spells.push_back(std::make_unique<T>(T { posX, posY }));
     endInsertRows();
 }

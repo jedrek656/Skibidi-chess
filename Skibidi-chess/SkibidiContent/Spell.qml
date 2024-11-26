@@ -3,8 +3,9 @@ import QtQuick.Controls
 
 Rectangle {
 
-    property string name: "Asbest"
+    property string name: "Asbestos"
     property int cost: 3
+    property int index: 0
 
     id: root
     width: 200
@@ -16,7 +17,7 @@ Rectangle {
         x: 0.1 * root.width
         y: 0.1 * root.height
         Text{
-            text: cost
+            text: root.cost
             width: 0.3 * parent.width
             height: 0.3 * parent.height
             font.pointSize: 100
@@ -24,12 +25,22 @@ Rectangle {
             fontSizeMode: Text.Fit
         }
         Text{
-            text: name
+            text: root.name
             anchors.fill: parent
             verticalAlignment: Text.AlignVCenter
             font.pointSize: 100
             minimumPointSize: 10
             fontSizeMode: Text.Fit
+        }
+        MouseArea{
+            anchors.fill: parent
+            hoverEnabled: true
+            onEntered: {
+                SpellListObj.setActiveSpell(index)
+            }
+            onExited: {
+                SpellListObj.setActiveSpell(-1)
+            }
         }
     }
 }

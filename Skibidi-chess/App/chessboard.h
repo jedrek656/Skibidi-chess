@@ -6,6 +6,7 @@
 #include <QAbstractListModel>
 
 #include "chesspiece.h"
+#include "spelllist.h"
 
 class ChessBoard : public QAbstractListModel
 {
@@ -24,6 +25,8 @@ public:
     QVariant data(const QModelIndex &idx, int role) const override;
     QHash<int, QByteArray> roleNames() const override;
     /**/
+
+    void setSpellList(SpellList* spellist);
 
 public slots:
     std::vector<std::vector<int>> getPossibleMoves(int index) const;
@@ -51,6 +54,8 @@ private:
     template <typename T>
     void addItem(int posX, int posY, bool isWhite);
     void loadDefaultPosition();
+
+    SpellList *spellList;
 };
 
 #endif // CHESSBOARD_H

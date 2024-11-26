@@ -74,6 +74,12 @@ QHash<int, QByteArray> ChessBoard::roleNames() const
     return roles;
 }
 
+void ChessBoard::setSpellList(SpellList *spellList)
+{
+    this->spellList = spellList;
+    QObject::connect(this, &ChessBoard::changePlayer, spellList, &SpellList::updateLifespans);
+}
+
 void ChessBoard::movePiece(int pieceIdx, int newPosX, int newPosY)
 {
     Q_ASSERT(pieceIdx >= 0 && pieceIdx < pieces.size());
