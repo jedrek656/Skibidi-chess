@@ -8,7 +8,9 @@ using possibleMoves = std::vector<std::vector<int>>;
 enum moveType{
     move = 0,
     capture = 1,
-    enpassan = 2
+    enpassan = 2,
+    castling = 3,
+    promotion = 4
 };
 
 

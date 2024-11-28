@@ -30,6 +30,8 @@ public slots:
     void movePiece(int idx, int newPosX, int newPosY);
     void capturePiece(int idx, int newPosX, int newPosY);
     void enPassant(int idx, int newPosX, int newPosY);
+    void promotePiece(int idx, int newPosX, int newPosY);
+    void castling(int idx, int newPosX, int newPosY);
     void loadPosition(QString position = "default");
 
     int getActivePiece() const;

@@ -84,7 +84,6 @@ void ChessBoard::movePiece(int pieceIdx, int newPosX, int newPosY)
             enPassantX = newPosX;
         }
     }
-    qInfo() <<enPassantX<<"\n";
     this->pieces[pieceIdx]->moveTo(newPosX, newPosY);
     emit dataChanged(this->index(pieceIdx), this->index(pieceIdx), {ItemRoles::PosXRole, ItemRoles::PosYRole});
     emit changePlayer();
@@ -145,6 +144,41 @@ void ChessBoard::enPassant(int pieceIdx, int newPosX, int newPosY)
     removeItem(toDelIdx);
     emit changePlayer();
     return;
+}
+
+void ChessBoard::promotePiece(int pieceIdx, int newPosX, int newPosY)
+{
+    return;
+}
+
+void ChessBoard::castling(int pieceIdx, int newPosX, int newPosY) {
+    ChessPiece *king = pieces[pieceIdx].get();
+    Q_ASSERT(king->getName() == "King");
+
+    if (newPosX == 6) {
+        // Kingside castling
+        for (size_t i = 0; i < pieces.size(); ++i) {
+            if (pieces[i]->getName() == "Rook" && pieces[i]->getPosX() == 7 && pieces[i]->getPosY() == king->getPosY()) {
+                pieces[i]->moveTo(5, king->getPosY());
+                emit dataChanged(index(i), index(i), {ItemRoles::PosXRole, ItemRoles::PosYRole});
+                break;
+            }
+        }
+    }
+    else if (newPosX == 2) {
+        // Queenside castling
+        for (size_t i = 0; i < pieces.size(); ++i) {
+            if (pieces[i]->getName() == "Rook" && pieces[i]->getPosX() == 0 && pieces[i]->getPosY() == king->getPosY()) {
+                pieces[i]->moveTo(3, king->getPosY());
+                emit dataChanged(index(i), index(i), {ItemRoles::PosXRole, ItemRoles::PosYRole});
+                break;
+            }
+        }
+    }
+
+    king->moveTo(newPosX, newPosY);
+    emit dataChanged(index(pieceIdx), index(pieceIdx), {ItemRoles::PosXRole, ItemRoles::PosYRole});
+    emit changePlayer();
 }
 
 void ChessBoard::loadPosition(QString position)

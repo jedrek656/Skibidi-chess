@@ -1,4 +1,5 @@
 #include "king.h"
+#include "rook.h"
 
 King::King(int posX, int posY, bool isWhite) : ChessPiece::ChessPiece(posX, posY, isWhite) {
     this->name = "King";
@@ -39,5 +40,44 @@ possibleMoves King::getPossibleMoves(piecesVector const &pieces, int enPassantX)
         }
     }
 
+    if (this->isFirstMove) {
+        bool canCastleKingside = true;
+        for (const auto &piece : pieces) {
+            if ((piece->getPosX() == 5 || piece->getPosX() == 6) && piece->getPosY() == this->posY) {
+                canCastleKingside = false;
+                break;
+            }
+            if (piece->getPosX() == 7 && piece->getPosY() == this->posY) {
+                if (piece->getName() != "Rook" || !piece->getIsWhite() == this->isWhite || !static_cast<Rook *>(piece.get())->getIsFirstMove()) {
+                    canCastleKingside = false;
+                }
+            }
+        }
+        if (canCastleKingside) {
+            result.push_back({6, posY, moveType::castling});
+        }
+
+        bool canCastleQueenside = true;
+        for (const auto &piece : pieces) {
+            if ((piece->getPosX() == 1 || piece->getPosX() == 2 || piece->getPosX() == 3) && piece->getPosY() == this->posY) {
+                canCastleQueenside = false;
+                break;
+            }
+            if (piece->getPosX() == 0 && piece->getPosY() == this->posY) {
+                if (piece->getName() != "Rook" || !piece->getIsWhite() == this->isWhite || !static_cast<Rook *>(piece.get())->getIsFirstMove()) {
+                    canCastleQueenside = false;
+                }
+            }
+        }
+        if (canCastleQueenside) {
+            result.push_back({2, posY, moveType::castling});
+        }
+    }
+
     return result;
+}
+
+void King::moveTo(int newPosX, int newPosY) {
+    ChessPiece::moveTo(newPosX, newPosY);
+    this->isFirstMove = false;
 }

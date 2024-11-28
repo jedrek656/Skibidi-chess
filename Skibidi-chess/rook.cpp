@@ -95,3 +95,11 @@ possibleMoves Rook::getPossibleMoves(piecesVector const &pieces, int enPassantX)
     return result;
 }
 
+void Rook::moveTo(int newPosX, int newPosY) {
+    ChessPiece::moveTo(newPosX, newPosY);
+    this->isFirstMove = false;
+}
+
+bool Rook::getIsFirstMove(){
+    return this->isFirstMove;
+}

@@ -103,6 +103,16 @@ Item {
                                                    possibleMovesRepeater.possibleMoves[index][0],
                                                    possibleMovesRepeater.possibleMoves[index][1]);
                         break;
+                    case 3:
+                        ChessboardObj.castling(ChessboardObj.getActivePiece(),
+                                                   possibleMovesRepeater.possibleMoves[index][0],
+                                                   possibleMovesRepeater.possibleMoves[index][1]);
+                        break;
+                    case 4:
+                        ChessboardObj.promotePiece(ChessboardObj.getActivePiece(),
+                                                   possibleMovesRepeater.possibleMoves[index][0],
+                                                   possibleMovesRepeater.possibleMoves[index][1]);
+                        break;
                 }
                 ChessboardObj.setActivePiece(-1);
                 possibleMovesRepeater.possibleMoves = []
@@ -123,9 +133,24 @@ Item {
                 anchors.centerIn: parent
                 width: parent.width
                 height: width
-                sourceComponent: possibleMovesRepeater.possibleMoves[index][2]
-                    ? captureIcon
-                    : moveIcon
+                sourceComponent: {
+                        switch (possibleMovesRepeater.possibleMoves[index][2]) {
+                            case 0:
+                                return moveIcon;
+                                break;
+                            case 1:
+                            case 2:
+                                return captureIcon;
+                                break;
+                            case 3:
+                            case 4:
+                                return moveIcon;
+                                break;
+                            default:
+                                return moveIcon;
+                                break;
+                        }
+                    }
             }
 
             Button{
