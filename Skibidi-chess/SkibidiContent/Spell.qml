@@ -33,14 +33,20 @@ Rectangle {
             fontSizeMode: Text.Fit
         }
         MouseArea{
+            property bool activeChoice: false
             anchors.fill: parent
             hoverEnabled: true
             onEntered: {
                 SpellListObj.setActiveSpell(index)
+                ChessboardObj.getPossibleSpellFields()
             }
             onExited: {
-                SpellListObj.setActiveSpell(-1)
+                if (!activeChoice){
+                    SpellListObj.setActiveSpell(-1)
+                    ChessboardObj.resetPossibleSpellFields()
+                }
             }
+            onClicked: activeChoice = !activeChoice
         }
     }
 }

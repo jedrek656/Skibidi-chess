@@ -145,6 +145,21 @@ void ChessBoard::setActivePiece(int newActivePiece)
     emit activePieceChanged();
 }
 
+void ChessBoard::getPossibleSpellFields()
+{
+    std::vector<std::vector<int>>fields;
+    fields.push_back(std::vector<int >{3, 3});
+    fields.push_back(std::vector<int >{3, 4});
+    fields.push_back(std::vector<int >{4, 4});
+
+    emit spellFieldsGenerated(fields);
+}
+
+void ChessBoard::resetPossibleSpellFields()
+{
+    emit spellFieldsGenerated({});
+}
+
 void ChessBoard::removeItem(int idx)
 {
     Q_ASSERT(idx >= 0 && idx < pieces.size());

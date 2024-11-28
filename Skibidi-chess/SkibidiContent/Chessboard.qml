@@ -109,9 +109,7 @@ Item {
             color: Qt.rgba(0,0,0,0)
 
             Loader {
-                anchors.centerIn: parent
-                width: parent.width
-                height: width
+                anchors.fill: parent
                 sourceComponent: possibleMovesRepeater.possibleMoves[index][2]
                     ? captureIcon
                     : moveIcon
@@ -152,9 +150,38 @@ Item {
         }
     }
 
-    /*Connections{
-        target: ChessboardObj
-        function onChangePlayer() {
+    Repeater{
+        model: 0
+        id: possibleSpellsRepeater
+        property variant possibleSpells: []
+        Rectangle{
+            required property int index
+            width: root.width / 8
+            height: root.height / 8
+            x: possibleSpellsRepeater.possibleSpells[index][0] * root.width / 8  + (root.width / 16 - width / 2)
+            y: possibleSpellsRepeater.possibleSpells[index][1] * root.height / 8 + (root.height / 16 - height / 2)
+            color: Qt.rgba(0,0,0,0)
+
+            Button{
+                anchors.fill: parent
+                background: Rectangle{color: Qt.rgba(0,0,0,0)}
+                onClicked: {
+
+                }
+            }
+
+            PossibleSpellCircle{
+                anchors.fill: parent
+            }
         }
-    }*/
+    }
+
+    Connections{
+        target: ChessboardObj
+        onSpellFieldsGenerated: (fields) => {
+            console.log(fields)
+            possibleSpellsRepeater.model = fields.length;
+            possibleSpellsRepeater.possibleSpells = fields
+        }
+    }
 }

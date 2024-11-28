@@ -37,11 +37,16 @@ public slots:
     int getActivePiece() const;
     void setActivePiece(int newActivePiece);
 
+    void getPossibleSpellFields();
+    void resetPossibleSpellFields();
+
 signals:
     void changePlayer();
     void chessboardLoaded();
     void activePieceChanged();
     void gameEnd(QString message);
+
+    void spellFieldsGenerated(std::vector<std::vector<int>> fields);
 
 private:
 

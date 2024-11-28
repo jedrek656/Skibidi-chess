@@ -26,6 +26,7 @@ qt6_add_qml_module(SkibidiContent
                 "PossibleCaptureIcon.qml"
                 "Asbestos.qml"
                 "HawkTuah.qml"
+                "PossibleSpellCircle.qml"
 	RESOURCES
 		"fonts/TrajanPro-Regular.ttf"
 		"images/NormalToiletImage.png"

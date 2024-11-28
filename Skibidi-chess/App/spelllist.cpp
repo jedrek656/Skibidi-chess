@@ -42,11 +42,6 @@ void SpellList::updateLifespans()
     }
 }
 
-void SpellList::test()
-{
-    addItem<AsbestosSpell>(4, 4);
-}
-
 vecIterator SpellList::removeItem(vecIterator currIterator)
 {
     int idx = currIterator - spells.begin();

@@ -30,7 +30,6 @@ public slots:
     void updateLifespans();
     void setActiveSpell(int newActiveSpell);
     int getActiveSpell() const;
-    void test();
 
 
 signals:
