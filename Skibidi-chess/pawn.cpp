@@ -1,57 +1,59 @@
 #include "pawn.h"
 
-//EN PASSANT IMPLEMENTED NOT IMPLEMENTED YET
-
 Pawn::Pawn(int posX, int posY, bool isWhite) : ChessPiece::ChessPiece(posX, posY, isWhite) {
     this->name = "Pawn";
 }
 
-possibleMoves Pawn::getPossibleMoves(piecesVector const &pieces) const {
-
-    if (this->posY==0 && this->isWhite){return {};}
-    if (this->posY==7 && !this->isWhite){return {};}
+possibleMoves Pawn::getPossibleMoves(piecesVector const &pieces, int enPassantX) const{
     possibleMoves result;
-    int maxReach = 1 + this->isFirstMove;
 
-    //for white pawn
-    if(this->isWhite){
-        for (auto &&piece : pieces){
-            if (piece->getPosY() == this->getPosY() - 2 && piece->getPosX() == this->getPosX()){
-                maxReach = std::min(maxReach, 1);
-            }
-            if (piece->getPosY() == this->getPosY() - 1) {
-                if (std::abs(piece->getPosX() - this->getPosX()) == 1 && piece->getIsWhite() != this->getIsWhite()){
-                    result.push_back({piece->getPosX(), posY - 1, moveType::capture});
-                }
-                if(piece->getPosX() == this->getPosX()){
-                    maxReach = std::min(maxReach, 0);
-                }
-            }
+    if (this->posY == 0 && this->isWhite || this->posY == 7 && !this->isWhite)
+        return result;
+
+    int direction = this->isWhite ? -1 : 1;
+    int startRow = this->isWhite ? 6 : 1;
+
+    bool isBlocked = false;
+    for (const auto& piece : pieces) {
+        if (piece->getPosX() == this->getPosX() && piece->getPosY() == this->getPosY() + direction)
+            isBlocked = true;
+    }
+    if (!isBlocked)
+        result.push_back({posX, posY + direction, moveType::move});
+
+    if (this->isFirstMove && posY == startRow) {
+        isBlocked = false;
+        for (const auto& piece : pieces) {
+            if (piece->getPosX() == this->getPosX() &&
+                (piece->getPosY() == this->getPosY() + direction ||
+                 piece->getPosY() == this->getPosY() + 2 * direction))
+                isBlocked = true;
         }
-        for (int i = 1; i < maxReach + 1; ++i){
-            result.push_back({posX, posY - i, moveType::move});
+        if (!isBlocked)
+            result.push_back({posX, posY + 2 * direction, moveType::move});
+    }
+
+    for (const auto& piece : pieces) {
+        if (piece->getPosY() == this->getPosY() + direction &&
+            std::abs(piece->getPosX() - this->getPosX()) == 1 &&
+            piece->getIsWhite() != this->isWhite)
+        {
+            result.push_back({piece->getPosX(), posY + direction, moveType::capture});
         }
     }
 
-    //for black pawn
-    else{
-        for (auto &&piece : pieces){
-            if (piece->getPosY() == this->getPosY() + 2 && piece->getPosX() == this->getPosX()){
-                maxReach = std::min(maxReach, 1);
+    // En passant
+    if (posY == (this->isWhite ? 3 : 4)) {
+        for (const auto& piece : pieces) {
+            int enPassantY = this->isWhite ? 2 : 5;
+            if (piece->getPosX() == enPassantX &&
+                piece->getPosY() == posY &&
+                piece->getIsWhite() != this->isWhite) {
+                result.push_back({enPassantX, enPassantY, moveType::enpassan});
             }
-            if (piece->getPosY() == this->getPosY() + 1) {
-                if (std::abs(piece->getPosX() - this->getPosX()) == 1 && piece->getIsWhite() != this->getIsWhite()){
-                    result.push_back({piece->getPosX(), posY + 1, moveType::capture});
-                }
-                if(piece->getPosX() == this->getPosX()){
-                    maxReach = std::min(maxReach, 0);
-                }
-            }
-        }
-        for (int i = 1; i < maxReach + 1; ++i){
-            result.push_back({posX, posY + i, moveType::move});
         }
     }
+
     return result;
 }
 

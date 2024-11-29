@@ -116,6 +116,10 @@ Rectangle {
         anchors.fill: chessboard
     }
 
+    Promotion{
+        anchors.fill: chessboard
+    }
+
     /*MenuSettings {
         id: menuSettings
         visible: false

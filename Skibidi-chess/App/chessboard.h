@@ -32,6 +32,9 @@ public slots:
     std::vector<std::vector<int>> getPossibleMoves(int index) const;
     void movePiece(int idx, int newPosX, int newPosY);
     void capturePiece(int idx, int newPosX, int newPosY);
+    void enPassant(int idx, int newPosX, int newPosY);
+    void promotePiece(int idx, QString name);
+    void castling(int idx, int newPosX, int newPosY);
     void loadPosition(QString position = "default");
 
     int getActivePiece() const;
@@ -45,13 +48,14 @@ signals:
     void chessboardLoaded();
     void activePieceChanged();
     void gameEnd(QString message);
+    void promotionDialog(int idx, bool isWhite);
 
     void spellFieldsGenerated(std::vector<std::vector<int>> fields);
 
 private:
 
     int activePiece = -1;
-
+    int enPassantX = -1;
     std::vector <std::unique_ptr<ChessPiece>> pieces;
     void removeItem(int idx);
     void clearList();

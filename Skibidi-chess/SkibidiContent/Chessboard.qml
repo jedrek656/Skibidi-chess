@@ -87,11 +87,27 @@ Item {
 
         function move(index) {
             if (ChessboardObj.getActivePiece() != -1){
-                if(possibleMovesRepeater.possibleMoves[index][2]) {
-                    ChessboardObj.capturePiece(ChessboardObj.getActivePiece(), possibleMovesRepeater.possibleMoves[index][0], possibleMovesRepeater.possibleMoves[index][1])
-                }
-                else{
-                    ChessboardObj.movePiece(ChessboardObj.getActivePiece(), possibleMovesRepeater.possibleMoves[index][0], possibleMovesRepeater.possibleMoves[index][1])
+                switch(possibleMovesRepeater.possibleMoves[index][2]){
+                    case 0:
+                        ChessboardObj.movePiece(ChessboardObj.getActivePiece(),
+                                                possibleMovesRepeater.possibleMoves[index][0],
+                                                possibleMovesRepeater.possibleMoves[index][1]);
+                        break;
+                    case 1:
+                        ChessboardObj.capturePiece(ChessboardObj.getActivePiece(),
+                                                   possibleMovesRepeater.possibleMoves[index][0],
+                                                   possibleMovesRepeater.possibleMoves[index][1]);
+                        break;
+                    case 2:
+                        ChessboardObj.enPassant(ChessboardObj.getActivePiece(),
+                                                   possibleMovesRepeater.possibleMoves[index][0],
+                                                   possibleMovesRepeater.possibleMoves[index][1]);
+                        break;
+                    case 3:
+                        ChessboardObj.castling(ChessboardObj.getActivePiece(),
+                                                   possibleMovesRepeater.possibleMoves[index][0],
+                                                   possibleMovesRepeater.possibleMoves[index][1]);
+                        break;
                 }
                 ChessboardObj.setActivePiece(-1);
                 possibleMovesRepeater.possibleMoves = []
@@ -110,9 +126,24 @@ Item {
 
             Loader {
                 anchors.fill: parent
-                sourceComponent: possibleMovesRepeater.possibleMoves[index][2]
-                    ? captureIcon
-                    : moveIcon
+                sourceComponent: {
+                        switch (possibleMovesRepeater.possibleMoves[index][2]) {
+                            case 0:
+                                return moveIcon;
+                                break;
+                            case 1:
+                            case 2:
+                                return captureIcon;
+                                break;
+                            case 3:
+                            case 4:
+                                return moveIcon;
+                                break;
+                            default:
+                                return moveIcon;
+                                break;
+                        }
+                    }
             }
 
             Button{

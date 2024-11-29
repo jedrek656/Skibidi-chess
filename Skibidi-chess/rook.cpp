@@ -90,8 +90,16 @@ possibleMoves Rook::checkHorizontal(int x, int y, bool is_white, std::vector<std
     return result;
 }
 
-possibleMoves Rook::getPossibleMoves(piecesVector const &pieces) const {
+possibleMoves Rook::getPossibleMoves(piecesVector const &pieces, int enPassantX) const {
     possibleMoves result = checkHorizontal(this->getPosX(), this->getPosY(), this->getIsWhite(), pieces);
     return result;
 }
 
+void Rook::moveTo(int newPosX, int newPosY) {
+    ChessPiece::moveTo(newPosX, newPosY);
+    this->isFirstMove = false;
+}
+
+bool Rook::getIsFirstMove(){
+    return this->isFirstMove;
+}

@@ -89,7 +89,7 @@ possibleMoves Bishop::checkDiagonal(int x, int y, bool is_white, std::vector<std
     return result;
 }
 
-possibleMoves Bishop::getPossibleMoves(piecesVector const &pieces) const {
+possibleMoves Bishop::getPossibleMoves(piecesVector const &pieces, int enPassantX) const {
     possibleMoves result = checkDiagonal(this->getPosX(), this->getPosY(), this->getIsWhite(), pieces);
     return result;
 }
