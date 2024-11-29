@@ -125,9 +125,7 @@ Item {
             color: Qt.rgba(0,0,0,0)
 
             Loader {
-                anchors.centerIn: parent
-                width: parent.width
-                height: width
+                anchors.fill: parent
                 sourceComponent: {
                         switch (possibleMovesRepeater.possibleMoves[index][2]) {
                             case 0:
@@ -173,9 +171,47 @@ Item {
         }
     }
 
-    /*Connections{
-        target: ChessboardObj
-        function onChangePlayer() {
+    Repeater{
+        model: SpellListObj
+        Asbestos{
+            width: 3 * root.width / 8
+            height: 3 * root.height / 8
+            x: 4 * root.width/8
+            y: 4 * root.height/8
         }
-    }*/
+    }
+
+    Repeater{
+
+        id: possibleSpellsRepeater
+        property variant possibleSpells: []
+        model: possibleSpells.length
+        Rectangle{
+            required property int index
+            width: root.width / 8
+            height: root.height / 8
+            x: possibleSpellsRepeater.possibleSpells[index][0] * root.width / 8  + (root.width / 16 - width / 2)
+            y: possibleSpellsRepeater.possibleSpells[index][1] * root.height / 8 + (root.height / 16 - height / 2)
+            color: Qt.rgba(0,0,0,0)
+
+            Button{
+                anchors.fill: parent
+                background: Rectangle{color: Qt.rgba(0,0,0,0)}
+                onClicked: {
+
+                }
+            }
+
+            PossibleSpellCircle{
+                anchors.fill: parent
+            }
+        }
+    }
+
+    Connections{
+        target: ChessboardObj
+        onSpellFieldsGenerated: (fields) => {
+            possibleSpellsRepeater.possibleSpells = fields
+        }
+    }
 }

@@ -6,6 +6,7 @@
 #include <QAbstractListModel>
 
 #include "chesspiece.h"
+#include "spelllist.h"
 
 class ChessBoard : public QAbstractListModel
 {
@@ -25,6 +26,8 @@ public:
     QHash<int, QByteArray> roleNames() const override;
     /**/
 
+    void setSpellList(SpellList* spellist);
+
 public slots:
     std::vector<std::vector<int>> getPossibleMoves(int index) const;
     void movePiece(int idx, int newPosX, int newPosY);
@@ -37,12 +40,17 @@ public slots:
     int getActivePiece() const;
     void setActivePiece(int newActivePiece);
 
+    void getPossibleSpellFields();
+    void resetPossibleSpellFields();
+
 signals:
     void changePlayer();
     void chessboardLoaded();
     void activePieceChanged();
     void gameEnd(QString message);
     void promotionDialog(int idx, bool isWhite);
+
+    void spellFieldsGenerated(std::vector<std::vector<int>> fields);
 
 private:
 
@@ -55,6 +63,8 @@ private:
     template <typename T>
     void addItem(int posX, int posY, bool isWhite);
     void loadDefaultPosition();
+
+    SpellList *spellList;
 };
 
 #endif // CHESSBOARD_H

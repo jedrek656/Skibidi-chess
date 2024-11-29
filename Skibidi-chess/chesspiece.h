@@ -1,22 +1,21 @@
 #ifndef CHESSPIECE_H
 #define CHESSPIECE_H
 
-#include <QObject>
+#include <QString>
 #include <QVariantList>
 
 using possibleMoves = std::vector<std::vector<int>>;
-enum moveType{
-    move = 0,
-    capture = 1,
-    enpassan = 2,
-    castling = 3
-};
-
 
 class ChessPiece
 {
 protected:
     using piecesVector = std::vector<std::unique_ptr<ChessPiece>>;
+    enum moveType{
+    move = 0,
+    capture = 1,
+    enpassan = 2,
+    castling = 3
+};
 
 public:
     ChessPiece(int posX, int posY, bool isWhite);

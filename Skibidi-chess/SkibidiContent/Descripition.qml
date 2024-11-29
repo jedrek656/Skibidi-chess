@@ -26,7 +26,7 @@ Rectangle {
         y: parent.height * 0.2
         width: parent.width * 0.5
         height: parent.height * 0.8
-        text: "ta postać rozlewa azbest na całą planszę trując przy tym wszystkie samotne matki z dzieckiem"
+        text: ""
         horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignTop
         wrapMode: Text.WordWrap
@@ -43,5 +43,25 @@ Rectangle {
         height: parent.height * 0.8
         source: "qrc:/qtquickplugin/images/template_image.png"
         fillMode: Image.PreserveAspectFit
+    }
+
+    Connections{
+        target: SpellListObj
+        onActiveSpellChanged: (index) => {
+            switch(index){
+                case 0:
+                    description.text = "spit on that thing"
+                    break;
+                case 1:
+                    description.text = "mmmm Asbesto"
+                    break;
+                case 2:
+                    description.text = "..."
+                    break;
+                case -1:
+                    description.text = ""
+                    break;
+            }
+        }
     }
 }
