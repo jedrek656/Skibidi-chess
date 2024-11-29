@@ -6,6 +6,7 @@
 
 #include "game.h"
 #include "chessboard.h"
+#include "spelllist.h"
 
 int main(int argc, char *argv[])
 {
@@ -14,8 +15,10 @@ int main(int argc, char *argv[])
 
     Game game;
     ChessBoard chessboard(&game);
+    SpellList spellList(&chessboard);
 
     game.setChessboard(&chessboard);
+    chessboard.setSpellList(&spellList);
 
     QQmlApplicationEngine engine;
     const QUrl url(mainQmlFile);
@@ -30,6 +33,7 @@ int main(int argc, char *argv[])
 
     engine.rootContext()->setContextProperty("GameObj", &game);
     engine.rootContext()->setContextProperty("ChessboardObj", &chessboard);
+    engine.rootContext()->setContextProperty("SpellListObj", &spellList);
 
 
 

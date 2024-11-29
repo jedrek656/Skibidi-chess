@@ -25,6 +25,12 @@ qt6_add_qml_module(SkibidiContent
     "GameOver.qml"
     "PossibleCaptureIcon.qml"
     "Promotion.qml"
+    "GameOver.qml"
+    "PossibleCaptureIcon.qml"
+    "Asbestos.qml"
+    "HawkTuah.qml"
+    "PossibleSpellCircle.qml"
+
 	RESOURCES
 		"fonts/TrajanPro-Regular.ttf"
 		"images/NormalToiletImage.png"

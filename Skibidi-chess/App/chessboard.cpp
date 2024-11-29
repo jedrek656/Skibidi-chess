@@ -7,6 +7,8 @@
 #include "knight.h"
 #include <QDebug>
 
+#include <algorithm>
+
 ChessBoard::ChessBoard(QObject *parent)
     : QAbstractListModel{parent}
 {
@@ -72,6 +74,12 @@ QHash<int, QByteArray> ChessBoard::roleNames() const
     roles[ItemRoles::PosYRole] = "posY";
     roles[ItemRoles::IsWhiteRole] = "isWhiteProperty";
     return roles;
+}
+
+void ChessBoard::setSpellList(SpellList *spellList)
+{
+    this->spellList = spellList;
+    QObject::connect(this, &ChessBoard::changePlayer, spellList, &SpellList::updateLifespans);
 }
 
 void ChessBoard::movePiece(int pieceIdx, int newPosX, int newPosY)
@@ -238,6 +246,37 @@ void ChessBoard::setActivePiece(int newActivePiece)
         return;
     activePiece = newActivePiece;
     emit activePieceChanged();
+}
+
+void ChessBoard::getPossibleSpellFields()
+{
+    std::vector<std::vector<int>>fields;
+    for (int i = 0; i < 8; ++i){
+        for (int j = 0; j < 8; ++j){
+            fields.push_back(std::vector<int> {i, j});
+        }
+    }
+
+    std::vector<std::vector<int>> occupied_fields;
+    for (auto&& piece: pieces){
+        occupied_fields.push_back(std::vector<int>{piece->getPosX(), piece->getPosY()});
+    }
+
+    fields.erase(std::remove_if(fields.begin(),
+                                fields.end(),
+                                [&](const std::vector<int>& field) {
+                                    return std::find(occupied_fields.begin(),
+                                                     occupied_fields.end(),
+                                                     field) != occupied_fields.end();
+                                }),
+                 fields.end());
+
+    emit spellFieldsGenerated(fields);
+}
+
+void ChessBoard::resetPossibleSpellFields()
+{
+    emit spellFieldsGenerated({});
 }
 
 void ChessBoard::removeItem(int idx)
