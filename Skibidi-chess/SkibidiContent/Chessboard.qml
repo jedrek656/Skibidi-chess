@@ -108,11 +108,6 @@ Item {
                                                    possibleMovesRepeater.possibleMoves[index][0],
                                                    possibleMovesRepeater.possibleMoves[index][1]);
                         break;
-                    case 4:
-                        ChessboardObj.promotePiece(ChessboardObj.getActivePiece(),
-                                                   possibleMovesRepeater.possibleMoves[index][0],
-                                                   possibleMovesRepeater.possibleMoves[index][1]);
-                        break;
                 }
                 ChessboardObj.setActivePiece(-1);
                 possibleMovesRepeater.possibleMoves = []

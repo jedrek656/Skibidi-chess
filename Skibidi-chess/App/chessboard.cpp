@@ -86,6 +86,16 @@ void ChessBoard::movePiece(int pieceIdx, int newPosX, int newPosY)
     }
     this->pieces[pieceIdx]->moveTo(newPosX, newPosY);
     emit dataChanged(this->index(pieceIdx), this->index(pieceIdx), {ItemRoles::PosXRole, ItemRoles::PosYRole});
+    if (pieces[pieceIdx]->getName() == "Pawn") {
+        if (newPosY == 0 && pieces[pieceIdx]->getIsWhite()){
+            emit promotionDialog(pieceIdx, true);
+            return;
+        }
+        else if (newPosY == 7 && !pieces[pieceIdx]->getIsWhite()){
+            emit promotionDialog(pieceIdx, false);
+            return;
+        }
+    }
     emit changePlayer();
     return;
 }
@@ -109,7 +119,6 @@ void ChessBoard::capturePiece(int pieceIdx, int newPosX, int newPosY)
     Q_ASSERT(toDelIdx != -1);
     this->pieces[pieceIdx]->moveTo(newPosX, newPosY);
     emit dataChanged(this->index(pieceIdx), this->index(pieceIdx), {ItemRoles::PosXRole, ItemRoles::PosYRole});
-
     removeItem(toDelIdx);
     if(toDelName == "King"){
         if(toDelIsWhite){
@@ -118,6 +127,16 @@ void ChessBoard::capturePiece(int pieceIdx, int newPosX, int newPosY)
         }
         else{
             emit gameEnd("White");
+            return;
+        }
+    }
+    if (pieces[pieceIdx]->getName() == "Pawn") {
+        if (newPosY == 0 && pieces[pieceIdx]->getIsWhite()){
+            emit promotionDialog(pieceIdx, true);
+            return;
+        }
+        else if (newPosY == 7 && !pieces[pieceIdx]->getIsWhite()){
+            emit promotionDialog(pieceIdx, false);
             return;
         }
     }
@@ -146,12 +165,31 @@ void ChessBoard::enPassant(int pieceIdx, int newPosX, int newPosY)
     return;
 }
 
-void ChessBoard::promotePiece(int pieceIdx, int newPosX, int newPosY)
+void ChessBoard::promotePiece(int pieceIdx, QString name)
 {
+    Q_ASSERT(name == "Queen" || name == "Rook" || name == "Bishop" || name == "Knight");
+    int PosX = pieces[pieceIdx]->getPosX();
+    int PosY = pieces[pieceIdx]->getPosY();
+    bool isWhite = pieces[pieceIdx]->getIsWhite();
+    if(name == "Queen"){
+        pieces[pieceIdx]=std::make_unique<Queen>(Queen { PosX, PosY, isWhite });
+    }
+    else if(name == "Rook"){
+        pieces[pieceIdx]=std::make_unique<Rook>(Rook { PosX, PosY, isWhite });
+    }
+    else if(name == "Bishop"){
+        pieces[pieceIdx]=std::make_unique<Bishop>(Bishop { PosX, PosY, isWhite });
+    }
+    else if(name == "Knight"){
+        pieces[pieceIdx]=std::make_unique<Knight>(Knight { PosX, PosY, isWhite });
+    }
+    emit dataChanged(this->index(pieceIdx), this->index(pieceIdx), {ItemRoles::NameRole});
+    emit changePlayer();
     return;
 }
 
-void ChessBoard::castling(int pieceIdx, int newPosX, int newPosY) {
+void ChessBoard::castling(int pieceIdx, int newPosX, int newPosY)
+{
     ChessPiece *king = pieces[pieceIdx].get();
     Q_ASSERT(king->getName() == "King");
 

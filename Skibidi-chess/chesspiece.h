@@ -9,8 +9,7 @@ enum moveType{
     move = 0,
     capture = 1,
     enpassan = 2,
-    castling = 3,
-    promotion = 4
+    castling = 3
 };
 
 

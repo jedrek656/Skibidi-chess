@@ -30,7 +30,7 @@ public slots:
     void movePiece(int idx, int newPosX, int newPosY);
     void capturePiece(int idx, int newPosX, int newPosY);
     void enPassant(int idx, int newPosX, int newPosY);
-    void promotePiece(int idx, int newPosX, int newPosY);
+    void promotePiece(int idx, QString name);
     void castling(int idx, int newPosX, int newPosY);
     void loadPosition(QString position = "default");
 
@@ -42,6 +42,7 @@ signals:
     void chessboardLoaded();
     void activePieceChanged();
     void gameEnd(QString message);
+    void promotionDialog(int idx, bool isWhite);
 
 private:
 
