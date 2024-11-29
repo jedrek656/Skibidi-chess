@@ -151,9 +151,10 @@ Item {
     }
 
     Repeater{
-        model: 0
+
         id: possibleSpellsRepeater
         property variant possibleSpells: []
+        model: possibleSpells.length
         Rectangle{
             required property int index
             width: root.width / 8
@@ -179,8 +180,6 @@ Item {
     Connections{
         target: ChessboardObj
         onSpellFieldsGenerated: (fields) => {
-            console.log(fields)
-            possibleSpellsRepeater.model = fields.length;
             possibleSpellsRepeater.possibleSpells = fields
         }
     }
