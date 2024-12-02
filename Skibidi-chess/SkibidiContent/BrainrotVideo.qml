@@ -23,7 +23,9 @@ Rectangle {
             onClicked: {
                 //video.play()
                 //ChessboardObj.loadPosition();
-                SpellListObj.test();
+                //SpellListObj.test();
+                ChessboardObj.loadFile();
+                //ChessboardObj.saveFile();
             }
         }
     }

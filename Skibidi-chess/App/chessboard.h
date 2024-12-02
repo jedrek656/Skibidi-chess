@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QVariantList>
 #include <QAbstractListModel>
+#include <iostream>
+#include <fstream>
 
 #include "chesspiece.h"
 #include "spelllist.h"
@@ -27,6 +29,9 @@ public:
     /**/
 
     void setSpellList(SpellList* spellist);
+    friend std::ostream &operator<<(std::ostream &out, const ChessBoard &board);
+    friend std::istream &operator>>(std::istream &in, ChessBoard &board);
+
 
 public slots:
     std::vector<std::vector<int>> getPossibleMoves(int index) const;
@@ -42,6 +47,8 @@ public slots:
 
     void getPossibleSpellFields();
     void resetPossibleSpellFields();
+    void saveFile();
+    void loadFile();
 
 signals:
     void changePlayer();

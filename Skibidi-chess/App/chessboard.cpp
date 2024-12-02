@@ -82,6 +82,40 @@ void ChessBoard::setSpellList(SpellList *spellList)
     QObject::connect(this, &ChessBoard::changePlayer, spellList, &SpellList::updateLifespans);
 }
 
+std::ostream &operator<<(std::ostream &out, const ChessBoard &board) {
+    for (const auto &piece : board.pieces) {
+        out << *piece << "\n";
+    }
+    return out;
+}
+
+std::istream &operator>>(std::istream &in, ChessBoard &board) {
+    std::string name;
+    int posX, posY;
+    std::string color;
+
+    while (in >> name >> posX >> posY >> color) {
+        bool isWhite = (color == "White");
+
+        if (name == "Pawn")
+            board.addItem<Pawn>(posX, posY, isWhite);
+        else if (name == "Rook")
+            board.addItem<Rook>(posX, posY, isWhite);
+        else if (name == "Bishop")
+            board.addItem<Bishop>(posX, posY, isWhite);
+        else if (name == "Knight")
+            board.addItem<Knight>(posX, posY, isWhite);
+        else if (name == "Queen")
+            board.addItem<Queen>(posX, posY, isWhite);
+        else if (name == "King")
+            board.addItem<King>(posX, posY, isWhite);
+        else
+            qDebug() << "Unknown piece type: " << QString::fromStdString(name);
+    }
+
+    return in;
+}
+
 void ChessBoard::movePiece(int pieceIdx, int newPosX, int newPosY)
 {
     Q_ASSERT(pieceIdx >= 0 && pieceIdx < pieces.size());
@@ -277,6 +311,24 @@ void ChessBoard::getPossibleSpellFields()
 void ChessBoard::resetPossibleSpellFields()
 {
     emit spellFieldsGenerated({});
+}
+
+void ChessBoard::saveFile()
+{
+    std::ofstream file;
+    file.open("C:/Users/pawel/Desktop/chess1.skibi", std::ofstream::out | std::ofstream::trunc);
+    file << *this;
+    file.close();
+}
+
+void ChessBoard::loadFile()
+{
+    std::ifstream file;
+    file.open("C:/Users/pawel/Desktop/chess1.skibi", std::ofstream::in);
+    clearList();
+    file >> *this;
+    file.close();
+    emit chessboardLoaded();
 }
 
 void ChessBoard::removeItem(int idx)
