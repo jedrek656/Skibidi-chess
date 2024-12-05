@@ -60,13 +60,13 @@ Item {
                 anchors.fill: parent
                 background: Rectangle{color: Qt.rgba(0,0,0,0)}
                 onClicked: {
-                    if (root.isActive == false) {
+                    if (root.isActive == false && isWhite == GameObj.checkTurn()) {
                         var possibleMoves = ChessboardObj.getPossibleMoves(index)
                         possibleMovesRepeater.possibleMoves = possibleMoves
                         ChessboardObj.setActivePiece(index);
                         root.isActive = true
                     }
-                    else if (ChessboardObj.getActivePiece() != index) {
+                    else if (ChessboardObj.getActivePiece() != index && isWhite == GameObj.checkTurn()) {
                         var possibleMoves = ChessboardObj.getPossibleMoves(index)
                         possibleMovesRepeater.possibleMoves = possibleMoves
                         ChessboardObj.setActivePiece(index);
@@ -115,6 +115,11 @@ Item {
             }
         }
 
+        function executeTurn(index) {
+            possibleMovesRepeater.move(index)
+            GameObj.changeTurn()
+        }
+
         model: possibleMoves.length
         Rectangle{
             required property int index
@@ -150,7 +155,7 @@ Item {
                 anchors.fill: parent
                 background: Rectangle{color: Qt.rgba(0,0,0,0)}
                 onClicked: {
-                    possibleMovesRepeater.move(index)
+                    possibleMovesRepeater.executeTurn(index)
                 }
             }
 
