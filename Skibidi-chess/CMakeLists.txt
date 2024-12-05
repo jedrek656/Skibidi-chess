@@ -37,6 +37,7 @@ qt_add_executable(${CMAKE_PROJECT_NAME}
     spell.h spell.cpp
     asbestosspell.h asbestosspell.cpp
     App/player.h App/player.cpp
+    uml2.qmodel
 
 )
 qt_add_resources(${CMAKE_PROJECT_NAME} "configuration"
