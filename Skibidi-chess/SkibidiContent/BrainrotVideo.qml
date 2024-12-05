@@ -24,8 +24,10 @@ Rectangle {
                 //video.play()
                 //ChessboardObj.loadPosition();
                 //SpellListObj.test();
-                ChessboardObj.loadFile();
+                //ChessboardObj.loadFile();
                 //ChessboardObj.saveFile();
+                //ChessboardObj.saveToFolder();
+                ChessboardObj.loadFromFile();
             }
         }
     }

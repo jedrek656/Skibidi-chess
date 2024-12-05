@@ -6,6 +6,11 @@
 #include "king.h"
 #include "knight.h"
 #include <QDebug>
+#include <QGuiApplication>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QFileDialog>
+#include <QDir>
+#include <QFile>
 
 #include <algorithm>
 
@@ -313,22 +318,42 @@ void ChessBoard::resetPossibleSpellFields()
     emit spellFieldsGenerated({});
 }
 
-void ChessBoard::saveFile()
+void ChessBoard::saveFile(QString path)
 {
     std::ofstream file;
-    file.open("C:/Users/pawel/Desktop/chess1.skibi", std::ofstream::out | std::ofstream::trunc);
+    file.open(path.toStdString(), std::ofstream::out | std::ofstream::trunc);
+    Q_ASSERT(file.is_open());
     file << *this;
     file.close();
 }
 
-void ChessBoard::loadFile()
+void ChessBoard::loadFile(QString path)
 {
     std::ifstream file;
-    file.open("C:/Users/pawel/Desktop/chess1.skibi", std::ofstream::in);
+    file.open(path.toStdString(), std::ofstream::in);
+    Q_ASSERT(file.is_open());
     clearList();
     file >> *this;
     file.close();
     emit chessboardLoaded();
+}
+
+void ChessBoard::saveToFolder() {
+    QString folderPath = QFileDialog::getSaveFileName(nullptr, "Select Folder to Save File", QDir::homePath(), "Skibi Files (*.skibi)");
+    if (folderPath.isEmpty()) {
+        qDebug() << "No folder selected.";
+        return;
+    }
+    saveFile(folderPath);
+}
+
+void ChessBoard::loadFromFile() {
+    QString filePath = QFileDialog::getOpenFileName(nullptr, "Select Folder to Save File", QDir::homePath(), "Skibi Files (*.skibi)");
+    if (filePath.isEmpty()) {
+        qDebug() << "No file selected.";
+        return;
+    }
+    loadFile(filePath);
 }
 
 void ChessBoard::removeItem(int idx)

@@ -47,8 +47,10 @@ public slots:
 
     void getPossibleSpellFields();
     void resetPossibleSpellFields();
-    void saveFile();
-    void loadFile();
+    void saveFile(QString path);
+    void loadFile(QString path);
+    void saveToFolder();
+    void loadFromFile();
 
 signals:
     void changePlayer();
