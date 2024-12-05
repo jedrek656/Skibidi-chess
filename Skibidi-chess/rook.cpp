@@ -2,6 +2,14 @@
 
 Rook::Rook(int posX, int posY, bool isWhite) : ChessPiece::ChessPiece(posX, posY, isWhite) {
     this->name = "Rook";
+    if(isWhite && posY != 7)
+    {
+        this->isFirstMove = false;
+    }
+    else if(!isWhite && posY != 0)
+    {
+        this->isFirstMove = false;
+    }
 }
 
 possibleMoves Rook::checkHorizontal(int x, int y, bool is_white, std::vector<std::unique_ptr<ChessPiece>> const &pieces) {

@@ -3,6 +3,7 @@
 
 #include <QString>
 #include <QVariantList>
+#include <iostream>
 
 using possibleMoves = std::vector<std::vector<int>>;
 
@@ -29,6 +30,9 @@ public:
     bool getIsWhite() const;
 
     operator QString() const;
+    friend std::ostream &operator<<(std::ostream &out, const ChessPiece &piece);
+    friend std::istream &operator>>(std::istream &in, ChessPiece &piece);
+
 
 protected:
     QString name;

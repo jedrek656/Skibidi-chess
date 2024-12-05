@@ -49,3 +49,23 @@ ChessPiece::operator QString() const
 {
     return this->name + ", " + QString::number(this->posX) + ", " + QString::number(this->posY);
 }
+
+std::ostream &operator<<(std::ostream &out, const ChessPiece &piece) {
+    out << piece.getName().toStdString() << " "
+        << piece.getPosX() << " "
+        << piece.getPosY() << " "
+        << (piece.getIsWhite() ? "White" : "Black");
+    return out;
+}
+
+std::istream &operator>>(std::istream &in, ChessPiece &piece) {
+    std::string name;
+    int posX, posY;
+    std::string color;
+    in >> name >> posX >> posY >> color;
+    piece.name = QString::fromStdString(name);
+    piece.posX = posX;
+    piece.posY = posY;
+    piece.isWhite = (color == "White");
+    return in;
+}

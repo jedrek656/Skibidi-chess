@@ -3,6 +3,14 @@
 
 King::King(int posX, int posY, bool isWhite) : ChessPiece::ChessPiece(posX, posY, isWhite) {
     this->name = "King";
+    if(isWhite && posY != 7)
+    {
+        this->isFirstMove = false;
+    }
+    else if(!isWhite && posY != 0)
+    {
+        this->isFirstMove = false;
+    }
 }
 
 possibleMoves King::getPossibleMoves(piecesVector const &pieces, int enPassantX) const {

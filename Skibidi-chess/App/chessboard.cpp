@@ -6,6 +6,11 @@
 #include "king.h"
 #include "knight.h"
 #include <QDebug>
+#include <QGuiApplication>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QFileDialog>
+#include <QDir>
+#include <QFile>
 
 #include <algorithm>
 
@@ -80,6 +85,40 @@ void ChessBoard::setSpellList(SpellList *spellList)
 {
     this->spellList = spellList;
     QObject::connect(this, &ChessBoard::changePlayer, spellList, &SpellList::updateLifespans);
+}
+
+std::ostream &operator<<(std::ostream &out, const ChessBoard &board) {
+    for (const auto &piece : board.pieces) {
+        out << *piece << "\n";
+    }
+    return out;
+}
+
+std::istream &operator>>(std::istream &in, ChessBoard &board) {
+    std::string name;
+    int posX, posY;
+    std::string color;
+
+    while (in >> name >> posX >> posY >> color) {
+        bool isWhite = (color == "White");
+
+        if (name == "Pawn")
+            board.addItem<Pawn>(posX, posY, isWhite);
+        else if (name == "Rook")
+            board.addItem<Rook>(posX, posY, isWhite);
+        else if (name == "Bishop")
+            board.addItem<Bishop>(posX, posY, isWhite);
+        else if (name == "Knight")
+            board.addItem<Knight>(posX, posY, isWhite);
+        else if (name == "Queen")
+            board.addItem<Queen>(posX, posY, isWhite);
+        else if (name == "King")
+            board.addItem<King>(posX, posY, isWhite);
+        else
+            qDebug() << "Unknown piece type: " << QString::fromStdString(name);
+    }
+
+    return in;
 }
 
 void ChessBoard::movePiece(int pieceIdx, int newPosX, int newPosY)
@@ -277,6 +316,44 @@ void ChessBoard::getPossibleSpellFields()
 void ChessBoard::resetPossibleSpellFields()
 {
     emit spellFieldsGenerated({});
+}
+
+void ChessBoard::saveFile(QString path)
+{
+    std::ofstream file;
+    file.open(path.toStdString(), std::ofstream::out | std::ofstream::trunc);
+    Q_ASSERT(file.is_open());
+    file << *this;
+    file.close();
+}
+
+void ChessBoard::loadFile(QString path)
+{
+    std::ifstream file;
+    file.open(path.toStdString(), std::ofstream::in);
+    Q_ASSERT(file.is_open());
+    clearList();
+    file >> *this;
+    file.close();
+    emit chessboardLoaded();
+}
+
+void ChessBoard::saveToFolder() {
+    QString folderPath = QFileDialog::getSaveFileName(nullptr, "Select Folder to Save File", QDir::homePath(), "Skibi Files (*.skibi)");
+    if (folderPath.isEmpty()) {
+        qDebug() << "No folder selected.";
+        return;
+    }
+    saveFile(folderPath);
+}
+
+void ChessBoard::loadFromFile() {
+    QString filePath = QFileDialog::getOpenFileName(nullptr, "Select Folder to Save File", QDir::homePath(), "Skibi Files (*.skibi)");
+    if (filePath.isEmpty()) {
+        qDebug() << "No file selected.";
+        return;
+    }
+    loadFile(filePath);
 }
 
 void ChessBoard::removeItem(int idx)
