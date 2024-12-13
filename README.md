@@ -48,7 +48,7 @@ Welcome to the **Chess Game with Skibidi Toilets and Spells**, a creative twist 
 ## Gameplay 🎮  
 
 - **Standard Chess**: Play chess as you know it, but...  
-- **With skibidi toilets & spells **:  
+- **With skibidi toilets & spells**:  
   - **Skibidi Toilets** appear on the board instead of regular chess pieces, altering visuals of the game.  
   - Use *Hawk Tuah* to unleash tactical advantages.  
   - Deploy *Asbestos* to protect your king or key pieces.  
