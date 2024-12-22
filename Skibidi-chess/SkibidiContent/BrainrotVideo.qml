@@ -27,7 +27,7 @@ Rectangle {
                 //ChessboardObj.loadFile();
                 //ChessboardObj.saveFile();
                 //ChessboardObj.saveToFolder();
-                ChessboardObj.loadFromFile();
+                //ChessboardObj.loadFromFile();
             }
         }
     }

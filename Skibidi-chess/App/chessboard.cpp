@@ -318,44 +318,6 @@ void ChessBoard::resetPossibleSpellFields()
     emit spellFieldsGenerated({});
 }
 
-void ChessBoard::saveFile(QString path)
-{
-    std::ofstream file;
-    file.open(path.toStdString(), std::ofstream::out | std::ofstream::trunc);
-    Q_ASSERT(file.is_open());
-    file << *this;
-    file.close();
-}
-
-void ChessBoard::loadFile(QString path)
-{
-    std::ifstream file;
-    file.open(path.toStdString(), std::ofstream::in);
-    Q_ASSERT(file.is_open());
-    clearList();
-    file >> *this;
-    file.close();
-    emit chessboardLoaded();
-}
-
-void ChessBoard::saveToFolder() {
-    QString folderPath = QFileDialog::getSaveFileName(nullptr, "Select Folder to Save File", QDir::homePath(), "Skibi Files (*.skibi)");
-    if (folderPath.isEmpty()) {
-        qDebug() << "No folder selected.";
-        return;
-    }
-    saveFile(folderPath);
-}
-
-void ChessBoard::loadFromFile() {
-    QString filePath = QFileDialog::getOpenFileName(nullptr, "Select Folder to Save File", QDir::homePath(), "Skibi Files (*.skibi)");
-    if (filePath.isEmpty()) {
-        qDebug() << "No file selected.";
-        return;
-    }
-    loadFile(filePath);
-}
-
 void ChessBoard::removeItem(int idx)
 {
     Q_ASSERT(idx >= 0 && idx < pieces.size());

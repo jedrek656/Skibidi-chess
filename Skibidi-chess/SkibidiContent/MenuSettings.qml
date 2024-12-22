@@ -5,6 +5,7 @@ Item {
     id: root
     width: 800
     height: 1000
+    visible: false
 
     Rectangle {
         id: rectangle
@@ -50,6 +51,7 @@ Item {
             font.family: "Verdana"
             icon.color: "#27262a"
 
+            onClicked: GameObj.openLoadDialog();
         }
 
         Button {
@@ -63,6 +65,7 @@ Item {
             font.family: "Verdana"
             icon.color: "#27262a"
 
+            onClicked: GameObj.openSaveDialog();
         }
 
         Button {
@@ -76,6 +79,12 @@ Item {
             font.family: "Verdana"
             icon.color: "#27262a"
 
+            onClicked: GameObj.closeApp();
         }
+    }
+
+    Connections{
+        target: GameObj;
+        onGamePaused: root.visible = !root.visible;
     }
 }

@@ -34,8 +34,7 @@ Rectangle {
 
     property int size: Math.min(width, height)
 
-    function getCircularPosition(centerX, centerY, radius, angle){  //kąt w stopniach, return to [x, y] koordynaty
-        //var radians = (angle * Math.PI) / 180
+    function getCircularPosition(centerX, centerY, radius, angle){
         var radians = angle
         return [centerX + radius * Math.cos(radians), centerY + radius * Math.sin(radians)]
     }
@@ -59,5 +58,15 @@ Rectangle {
             ctx.stroke()
             ctx.fill()
         }
+    }
+
+    Button{
+        anchors.fill: parent
+        onClicked: GameObj.pauseGame();
+        background:
+            Rectangle{
+                anchors.fill: parent;
+                color: Qt.rgba(0,0,0,0);
+            }
     }
 }

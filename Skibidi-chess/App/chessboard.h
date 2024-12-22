@@ -32,6 +32,8 @@ public:
     friend std::ostream &operator<<(std::ostream &out, const ChessBoard &board);
     friend std::istream &operator>>(std::istream &in, ChessBoard &board);
 
+    void clearList();
+
 
 public slots:
     std::vector<std::vector<int>> getPossibleMoves(int index) const;
@@ -47,10 +49,6 @@ public slots:
 
     void getPossibleSpellFields();
     void resetPossibleSpellFields();
-    void saveFile(QString path);
-    void loadFile(QString path);
-    void saveToFolder();
-    void loadFromFile();
 
 signals:
     void changePlayer();
@@ -67,7 +65,7 @@ private:
     int enPassantX = -1;
     std::vector <std::unique_ptr<ChessPiece>> pieces;
     void removeItem(int idx);
-    void clearList();
+
 
     template <typename T>
     void addItem(int posX, int posY, bool isWhite);

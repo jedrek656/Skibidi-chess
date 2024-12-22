@@ -120,14 +120,13 @@ Rectangle {
         anchors.fill: chessboard
     }
 
-    /*MenuSettings {
+    MenuSettings {
         id: menuSettings
-        visible: false
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
         width: 800
         height: 1000
-    }*/
+    }
 
     MainMenu {
         id: mainMenu

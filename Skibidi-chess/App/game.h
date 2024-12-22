@@ -2,6 +2,8 @@
 #define GAME_H
 
 #include <QObject>
+#include <iostream>
+#include <fstream>
 #include "chessboard.h"
 #include "player.h"
 
@@ -16,14 +18,23 @@ public:
 public slots:
     void closeApp() const;
     bool checkTurn();
-   void changeTurn();
+    void changeTurn();
+    void pauseGame();
+
+
+    void openSaveDialog();
+    void openLoadDialog();
 
 signals:
+    void gamePaused();
 
 private:
     ChessBoard *chessboard;
     std::unique_ptr<Player> player1, player2;
     bool turn = true;  // true - player 1, false = player2
+
+    void saveFile(QString path);
+    void loadFile(QString path);
 };
 
 #endif // GAME_H
