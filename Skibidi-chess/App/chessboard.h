@@ -5,7 +5,6 @@
 #include <QVariantList>
 #include <QAbstractListModel>
 #include <iostream>
-#include <fstream>
 
 #include "chesspiece.h"
 #include "spelllist.h"
@@ -20,6 +19,13 @@ public:
         PosYRole,
         IsWhiteRole,
     };
+
+    enum Spells {
+        HawkTuah = 0,
+        Asbestos,
+        CheeseDrippy,
+    };
+
     explicit ChessBoard(QObject *parent = nullptr);
 
     /* REQUIRED METHODS FOR QABSTRACT LIST */
@@ -47,7 +53,7 @@ public slots:
     int getActivePiece() const;
     void setActivePiece(int newActivePiece);
 
-    void getPossibleSpellFields();
+    void getPossibleSpellFields(int spellIdx, bool isWhite);
     void resetPossibleSpellFields();
 
 signals:

@@ -38,7 +38,7 @@ Rectangle {
             hoverEnabled: true
             onEntered: {
                 SpellListObj.setActiveSpell(index)
-                ChessboardObj.getPossibleSpellFields()
+                ChessboardObj.getPossibleSpellFields(index, GameObj.checkTurn())
             }
             onExited: {
                 if (!activeChoice){

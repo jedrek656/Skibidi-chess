@@ -16,7 +16,6 @@ public:
         PosXRole,
         PosYRole,
         LifespanRole,
-        IsWhiteRole,
     };
     explicit SpellList(QObject *parent = nullptr);
 
@@ -30,6 +29,8 @@ public slots:
     void updateLifespans();
     void setActiveSpell(int newActiveSpell);
     int getActiveSpell() const;
+
+    void castSpell(int posX, int posY, int spellIdx);
 
 
 signals:

@@ -287,29 +287,38 @@ void ChessBoard::setActivePiece(int newActivePiece)
     emit activePieceChanged();
 }
 
-void ChessBoard::getPossibleSpellFields()
+void ChessBoard::getPossibleSpellFields(int spellIdx, bool isWhite)
 {
     std::vector<std::vector<int>>fields;
-    for (int i = 0; i < 8; ++i){
-        for (int j = 0; j < 8; ++j){
-            fields.push_back(std::vector<int> {i, j});
+    if (spellIdx==Spells::HawkTuah){
+        for(auto& piece: this->pieces){
+            if(piece->getIsWhite() == isWhite){
+                fields.push_back({piece->getPosX(), piece->getPosY()});
+            }
         }
     }
 
-    std::vector<std::vector<int>> occupied_fields;
-    for (auto&& piece: pieces){
-        occupied_fields.push_back(std::vector<int>{piece->getPosX(), piece->getPosY()});
+    else{
+        for (int i = 0; i < 8; ++i){
+            for (int j = 0; j < 8; ++j){
+                fields.push_back(std::vector<int> {i, j});
+            }
+        }
+
+        std::vector<std::vector<int>> occupied_fields;
+        for (auto&& piece: pieces){
+            occupied_fields.push_back(std::vector<int>{piece->getPosX(), piece->getPosY()});
+        }
+
+        fields.erase(std::remove_if(fields.begin(),
+                                    fields.end(),
+                                    [&](const std::vector<int>& field) {
+                                        return std::find(occupied_fields.begin(),
+                                                         occupied_fields.end(),
+                                                         field) != occupied_fields.end();
+                                    }),
+                     fields.end());
     }
-
-    fields.erase(std::remove_if(fields.begin(),
-                                fields.end(),
-                                [&](const std::vector<int>& field) {
-                                    return std::find(occupied_fields.begin(),
-                                                     occupied_fields.end(),
-                                                     field) != occupied_fields.end();
-                                }),
-                 fields.end());
-
     emit spellFieldsGenerated(fields);
 }
 

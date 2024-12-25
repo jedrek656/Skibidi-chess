@@ -35,31 +35,21 @@ Rectangle {
         font.pointSize: 20
     }
 
-    Image {
-        id: image
-        x: parent.width * 0.55
-        y: parent.height * 0.2
-        width: parent.width * 0.4
-        height: parent.height * 0.8
-        source: "qrc:/qtquickplugin/images/template_image.png"
-        fillMode: Image.PreserveAspectFit
-    }
-
     Connections{
         target: SpellListObj
         onActiveSpellChanged: (index) => {
             switch(index){
                 case 0:
-                    description.text = "spit on that thing"
+                    description.text = "By spitting on that thang (your piece) you are able to make it uncaputrable for one round. However you can't move this piece this round."
                     break;
                 case 1:
-                    description.text = "mmmm Asbesto"
+                    description.text = "Pouring the fresh asbesto on ground makes every piece..."
                     break;
                 case 2:
-                    description.text = "..."
+                    description.text = "The drippy cheese (found only in newest lunchly) works as blank piece bloking the moves for both sides."
                     break;
                 case -1:
-                    description.text = ""
+                    description.text = "Hover over spell to read its description :33"
                     break;
             }
         }

@@ -2,14 +2,15 @@
 #define SPELL_H
 
 #include <QString>
+#include <QVariantList>
 
 class Spell
 {
 public:
-    Spell(int posX, int posY);
-    void castSpell();
+    Spell(int posX, int posY, int spellIdx);
     bool decreaseDuration();
     virtual bool isFieldAffected(int posX, int posY) const;
+    QVariantList getSpell() const;
 
 
 protected:

@@ -35,7 +35,7 @@ qt_add_executable(${CMAKE_PROJECT_NAME}
     king.h king.cpp
     App/spelllist.h App/spelllist.cpp
     spell.h spell.cpp
-    asbestosspell.h asbestosspell.cpp
+
     App/player.h App/player.cpp
     uml2.qmodel
 

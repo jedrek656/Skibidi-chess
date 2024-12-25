@@ -87,6 +87,7 @@ Rectangle {
     Spell {
         id: spell1
         index: 1
+        name: "Asbestos"
         anchors.left: descripition.left
         anchors.bottom: chessboard.bottom
         width: descripition.width / 3.3
@@ -106,6 +107,7 @@ Rectangle {
     Spell {
         id: spell2
         index: 2
+        name: "Cheesy Drippy"
         anchors.right: descripition.right
         anchors.bottom: chessboard.bottom
         width: descripition.width / 3.3

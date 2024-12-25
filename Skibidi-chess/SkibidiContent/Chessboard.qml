@@ -179,10 +179,12 @@ Item {
     Repeater{
         model: SpellListObj
         Asbestos{
+            required property int posX
+            required property int posY
             width: 3 * root.width / 8
             height: 3 * root.height / 8
-            x: 4 * root.width/8
-            y: 4 * root.height/8
+            x: posX * root.width/8
+            y: posY * root.height/8
         }
     }
 
@@ -199,16 +201,10 @@ Item {
             y: possibleSpellsRepeater.possibleSpells[index][1] * root.height / 8 + (root.height / 16 - height / 2)
             color: Qt.rgba(0,0,0,0)
 
-            Button{
-                anchors.fill: parent
-                background: Rectangle{color: Qt.rgba(0,0,0,0)}
-                onClicked: {
-
-                }
-            }
-
             PossibleSpellCircle{
                 anchors.fill: parent
+                posX: possibleSpellsRepeater.possibleSpells[index][0]
+                posY: possibleSpellsRepeater.possibleSpells[index][1]
             }
         }
     }
