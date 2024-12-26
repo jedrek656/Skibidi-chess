@@ -42,7 +42,7 @@ public:
 
 
 public slots:
-    std::vector<std::vector<int>> getPossibleMoves(int index) const;
+    std::vector<std::vector<int>> getPossibleMoves(int index);
     void movePiece(int idx, int newPosX, int newPosY);
     void capturePiece(int idx, int newPosX, int newPosY);
     void enPassant(int idx, int newPosX, int newPosY);
@@ -78,6 +78,7 @@ private:
     void loadDefaultPosition();
 
     SpellList *spellList;
+
 };
 
 #endif // CHESSBOARD_H

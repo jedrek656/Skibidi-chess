@@ -18,6 +18,7 @@
 ChessBoard::ChessBoard(QObject *parent)
     : QAbstractListModel{parent}
 {
+    srand(0);
 }
 
 void ChessBoard::loadDefaultPosition() {
@@ -359,9 +360,23 @@ void ChessBoard::addItem(int posX, int posY, bool isWhite)
     endInsertRows();
 }
 
-std::vector<std::vector<int>> ChessBoard::getPossibleMoves(int index) const{
+std::vector<std::vector<int>> ChessBoard::getPossibleMoves(int index){
+    int oldSize = this->pieces.size();
+    bool asbestoAffected = false;
+
     for (auto& spell: *this->spellList->getSpells()){
         auto spellPos = spell->getPos();
+        this->pieces.push_back(std::make_unique<DummyPiece>(spellPos.first, spellPos.second, pieces[index]->getIsWhite()));
     }
-    return pieces[index]->getPossibleMoves(this->pieces, enPassantX);
+    auto moves = pieces[index]->getPossibleMoves(this->pieces, enPassantX);
+    this->pieces.erase(std::remove_if(pieces.begin(),
+                                      pieces.end(),
+                                      [&](const std::unique_ptr<ChessPiece> &piece){
+                                          return piece->getName()=="Dummy";
+                                      }),
+                                      pieces.end());
+    Q_ASSERT(this->pieces.size() == oldSize);
+
+    //ASBESTO SPELL
+    return moves;
 }
