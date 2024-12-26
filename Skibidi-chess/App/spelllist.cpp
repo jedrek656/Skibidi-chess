@@ -82,6 +82,11 @@ void SpellList::castSpell(int posX, int posY, int spellIdx)
     endInsertRows();
 }
 
+std::vector<std::unique_ptr<Spell>>* SpellList::getSpells()
+{
+    return &(this->spells);
+}
+
 void SpellList::setActiveSpell(int newActiveSpell)
 {
     if (activeSpell == newActiveSpell)

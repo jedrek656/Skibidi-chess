@@ -31,7 +31,7 @@ public slots:
     int getActiveSpell() const;
 
     void castSpell(int posX, int posY, int spellIdx);
-
+    std::vector <std::unique_ptr<Spell>> *getSpells();
 
 signals:
     void activeSpellChanged(int index);

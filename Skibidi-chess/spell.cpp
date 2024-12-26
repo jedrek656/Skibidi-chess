@@ -39,3 +39,8 @@ QVariantList Spell::getSpell() const
 {
     return {this->name, this->posX, this->posY, this->lifespan};
 }
+
+std::pair<int, int> Spell::getPos() const
+{
+    return {this->posX, this->posY};
+}

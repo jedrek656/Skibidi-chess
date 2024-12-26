@@ -38,6 +38,7 @@ qt_add_executable(${CMAKE_PROJECT_NAME}
 
     App/player.h App/player.cpp
     uml2.qmodel
+    App/dummypiece.h App/dummypiece.cpp
 
 )
 qt_add_resources(${CMAKE_PROJECT_NAME} "configuration"

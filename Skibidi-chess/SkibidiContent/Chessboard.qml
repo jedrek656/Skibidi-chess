@@ -178,13 +178,15 @@ Item {
 
     Repeater{
         model: SpellListObj
-        Asbestos{
+        Rectangle{
+            required property string nameProperty
             required property int posX
             required property int posY
-            width: 3 * root.width / 8
-            height: 3 * root.height / 8
-            x: posX * root.width/8
-            y: posY * root.height/8
+            width: (nameProperty=="Asbestos"? 3 : 1) * root.width / 8
+            height: (nameProperty=="Asbestos"? 3 : 1) * root.height / 8
+            x: (nameProperty=="Asbestos"? posX - 1 : posX) * root.width/8
+            y: (nameProperty=="Asbestos"? posY - 1 : posY) * root.height/8
+            color: (nameProperty=="Asbestos"? Qt.rgba(0.3, 0.3, 0.3, 0.5) : (nameProperty=="Hawk Tuah"? Qt.rgba(0.7, 0.7, 0.7, 0.5) : Qt.rgba(0, 1, 0.9, 0.5)) )
         }
     }
 

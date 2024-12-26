@@ -5,6 +5,7 @@
 #include "queen.h"
 #include "king.h"
 #include "knight.h"
+#include "dummypiece.h"
 #include <QDebug>
 #include <QGuiApplication>
 #include <QtWidgets/QApplication>
@@ -115,7 +116,7 @@ std::istream &operator>>(std::istream &in, ChessBoard &board) {
         else if (name == "King")
             board.addItem<King>(posX, posY, isWhite);
         else
-            qDebug() << "Unknown piece type: " << QString::fromStdString(name);
+            throw std::runtime_error("Save file incorrect");
     }
 
     return in;
@@ -290,10 +291,18 @@ void ChessBoard::setActivePiece(int newActivePiece)
 void ChessBoard::getPossibleSpellFields(int spellIdx, bool isWhite)
 {
     std::vector<std::vector<int>>fields;
-    if (spellIdx==Spells::HawkTuah){
+    if (spellIdx == Spells::HawkTuah){
         for(auto& piece: this->pieces){
             if(piece->getIsWhite() == isWhite){
                 fields.push_back({piece->getPosX(), piece->getPosY()});
+            }
+        }
+    }
+
+    else if (spellIdx == Spells::Asbestos){
+        for (int i = 1; i < 7; ++i){
+            for (int j = 1; j < 7; ++j){
+                fields.push_back(std::vector<int> {i, j});
             }
         }
     }
@@ -351,5 +360,8 @@ void ChessBoard::addItem(int posX, int posY, bool isWhite)
 }
 
 std::vector<std::vector<int>> ChessBoard::getPossibleMoves(int index) const{
+    for (auto& spell: *this->spellList->getSpells()){
+        auto spellPos = spell->getPos();
+    }
     return pieces[index]->getPossibleMoves(this->pieces, enPassantX);
 }

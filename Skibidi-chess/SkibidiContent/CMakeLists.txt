@@ -25,12 +25,9 @@ qt6_add_qml_module(SkibidiContent
                 "GameOver.qml"
                 "PossibleCaptureIcon.qml"
                 "Promotion.qml"
-                "GameOver.qml"
-                "PossibleCaptureIcon.qml"
-                "Asbestos.qml"
+                "SpellOnBoard.qml"
                 "HawkTuah.qml"
                 "PossibleSpellCircle.qml"
-                "CheeseDrippy.qml"
 
 
 	RESOURCES

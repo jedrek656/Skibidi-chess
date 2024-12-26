@@ -11,6 +11,7 @@ public:
     bool decreaseDuration();
     virtual bool isFieldAffected(int posX, int posY) const;
     QVariantList getSpell() const;
+    std::pair<int, int> getPos() const;
 
 
 protected:
