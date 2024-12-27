@@ -18,7 +18,6 @@
 ChessBoard::ChessBoard(QObject *parent)
     : QAbstractListModel{parent}
 {
-    srand(0);
 }
 
 void ChessBoard::loadDefaultPosition() {
@@ -378,5 +377,12 @@ std::vector<std::vector<int>> ChessBoard::getPossibleMoves(int index){
     Q_ASSERT(this->pieces.size() == oldSize);
 
     //ASBESTO SPELL
+    srand(index);
+    moves.erase(std::remove_if(moves.begin(),
+                                      moves.end(),
+                                      [&](const std::vector<int> &move){
+                                      return (rand()%100) >= 80;
+                                      }),
+                       moves.end());
     return moves;
 }
