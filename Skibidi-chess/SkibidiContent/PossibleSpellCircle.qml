@@ -24,10 +24,12 @@ Rectangle {
     Button {
         anchors.fill: parent;
         background:
-            Rectangle{
+            Rectangle {
                 anchors.fill: parent;
                 color: Qt.rgba(0,0,0,0);
             }
-        onClicked: SpellListObj.castSpell(root.posX, root.posY, SpellListObj.getActiveSpell());
+        onClicked: {
+            SpellListObj.castSpell(root.posX, root.posY, SpellListObj.getActiveSpell());
+        }
     }
 }

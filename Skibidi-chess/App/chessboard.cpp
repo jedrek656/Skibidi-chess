@@ -20,7 +20,8 @@ ChessBoard::ChessBoard(QObject *parent)
 {
 }
 
-void ChessBoard::loadDefaultPosition() {
+void ChessBoard::loadDefaultPosition()
+{
     for(int j=0; j<8; ++j){
         addItem<Pawn>(j, 1, false);
     }
@@ -88,14 +89,16 @@ void ChessBoard::setSpellList(SpellList *spellList)
     QObject::connect(this, &ChessBoard::changePlayer, spellList, &SpellList::updateLifespans);
 }
 
-std::ostream &operator<<(std::ostream &out, const ChessBoard &board) {
+std::ostream &operator<<(std::ostream &out, const ChessBoard &board)
+{
     for (const auto &piece : board.pieces) {
         out << *piece << "\n";
     }
     return out;
 }
 
-std::istream &operator>>(std::istream &in, ChessBoard &board) {
+std::istream &operator>>(std::istream &in, ChessBoard &board)
+{
     std::string name;
     int posX, posY;
     std::string color;
@@ -359,13 +362,16 @@ void ChessBoard::addItem(int posX, int posY, bool isWhite)
     endInsertRows();
 }
 
-std::vector<std::vector<int>> ChessBoard::getPossibleMoves(int index){
+std::vector<std::vector<int>> ChessBoard::getPossibleMoves(int index)
+{
     int oldSize = this->pieces.size();
     bool asbestoAffected = false;
 
     for (auto& spell: *this->spellList->getSpells()){
-        auto spellPos = spell->getPos();
-        this->pieces.push_back(std::make_unique<DummyPiece>(spellPos.first, spellPos.second, pieces[index]->getIsWhite()));
+        if(spell->getSpell()[0] == "Cheese Drippy"){
+            auto spellPos = spell->getPos();
+            this->pieces.push_back(std::make_unique<DummyPiece>(spellPos.first, spellPos.second, pieces[index]->getIsWhite()));
+        }
     }
     auto moves = pieces[index]->getPossibleMoves(this->pieces, enPassantX);
     this->pieces.erase(std::remove_if(pieces.begin(),
@@ -377,12 +383,12 @@ std::vector<std::vector<int>> ChessBoard::getPossibleMoves(int index){
     Q_ASSERT(this->pieces.size() == oldSize);
 
     //ASBESTO SPELL
-    srand(index);
+    /*srand(index);
     moves.erase(std::remove_if(moves.begin(),
                                       moves.end(),
                                       [&](const std::vector<int> &move){
                                       return (rand()%100) >= 80;
                                       }),
-                       moves.end());
+                       moves.end());*/
     return moves;
 }

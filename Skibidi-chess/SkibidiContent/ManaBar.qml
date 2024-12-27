@@ -6,7 +6,9 @@ Item {
     width: 600
     height: 100
 
-    property int manaPoints: 8
+    property bool player
+
+    property int manaPoints: GameObj.getMana(root.player)
     property int maxMana: 10
 
     property string grayDark: "gray"
@@ -86,6 +88,11 @@ Item {
         color: blueLight
         border.width: width * 0.1
         border.color:  "#000f12"
+    }
+
+    Connections{
+        target: GameObj
+        onUpdateMana: root.manaPoints = GameObj.getMana(root.player)
     }
 
 }

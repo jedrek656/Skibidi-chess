@@ -75,10 +75,10 @@ int SpellList::getActiveSpell() const
     return activeSpell;
 }
 
-void SpellList::castSpell(int posX, int posY, int spellIdx)
+void SpellList::castSpell(int posX, int posY)
 {
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
-    this->spells.push_back(std::make_unique<Spell>(posX, posY, spellIdx));
+    this->spells.push_back(std::make_unique<Spell>(posX, posY, this->activeSpell));
     endInsertRows();
 }
 

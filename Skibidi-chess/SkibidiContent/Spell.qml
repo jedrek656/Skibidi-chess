@@ -46,7 +46,9 @@ Rectangle {
                     ChessboardObj.resetPossibleSpellFields()
                 }
             }
-            onClicked: activeChoice = !activeChoice
+            onClicked: {
+                activeChoice = !activeChoice
+            }
         }
     }
 }

@@ -27,6 +27,13 @@ void Game::setChessboard(ChessBoard *chessboard){
 
 void Game::changeTurn() {
     this->turn = !this->turn;
+    if (turn){
+        player1->addMana();
+    }
+    else{
+        player2->addMana();
+    }
+    emit updateMana();
 }
 
 void Game::pauseGame()
@@ -78,9 +85,13 @@ void Game::openLoadDialog() {
     loadFile(filePath);
 }
 
-/*Player Game::getCurrentPlayer() {
-    if (this->turn == true)
-        return this->player1;
-    else
-        return this->player2;
-}*/
+int Game::getMana(bool player) const
+{
+    if(player) return player1->getMana();
+    return player2->getMana();
+}
+
+int Game::getCurrPlayerMana() const
+{
+    return getMana(this->turn);
+}

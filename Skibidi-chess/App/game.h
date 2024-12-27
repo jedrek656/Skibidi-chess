@@ -13,7 +13,6 @@ class Game : public QObject
 public:
     explicit Game(QObject *parent = nullptr, ChessBoard *chessboard = nullptr);
     void setChessboard(ChessBoard *chessboard);
-    // Player getCurrentPlayer();
 
 public slots:
     void closeApp() const;
@@ -25,8 +24,12 @@ public slots:
     void openSaveDialog();
     void openLoadDialog();
 
+    int getMana(bool player) const;
+    int getCurrPlayerMana() const;
+
 signals:
     void gamePaused();
+    void updateMana();
 
 private:
     ChessBoard *chessboard;
