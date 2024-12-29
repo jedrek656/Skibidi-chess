@@ -29,7 +29,7 @@ Rectangle {
                 color: Qt.rgba(0,0,0,0);
             }
         onClicked: {
-            SpellListObj.castSpell(root.posX, root.posY, SpellListObj.getActiveSpell());
+            SpellListObj.castSpell(root.posX, root.posY);
         }
     }
 }

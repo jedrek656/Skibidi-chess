@@ -14,6 +14,8 @@ public:
     explicit Game(QObject *parent = nullptr, ChessBoard *chessboard = nullptr);
     void setChessboard(ChessBoard *chessboard);
 
+    void decreaseCurrPlayerMana(int cost);
+
 public slots:
     void closeApp() const;
     bool checkTurn();

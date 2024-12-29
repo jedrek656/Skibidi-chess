@@ -19,6 +19,7 @@ int main(int argc, char *argv[])
 
     game.setChessboard(&chessboard);
     chessboard.setSpellList(&spellList);
+    spellList.setGame(&game);
 
     QQmlApplicationEngine engine;
     const QUrl url(mainQmlFile);

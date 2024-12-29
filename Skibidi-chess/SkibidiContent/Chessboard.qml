@@ -217,4 +217,10 @@ Item {
             possibleSpellsRepeater.possibleSpells = fields
         }
     }
+    Connections{
+        target: SpellListObj
+        onHideSpells: () => {
+            possibleSpellsRepeater.possibleSpells = []
+        }
+    }
 }

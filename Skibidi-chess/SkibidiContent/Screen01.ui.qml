@@ -62,7 +62,7 @@ Rectangle {
 
     ManaBar {
         id: manaBar
-        player: true
+        player: false
         anchors.right: chessboard.right
         anchors.top: myTimer.top
         width: chessboard.width / 1.5
@@ -71,7 +71,7 @@ Rectangle {
 
     ManaBar {
         id: manaBar1
-        player: false
+        player: true
         anchors.right: chessboard.right
         anchors.top: myTimer1.top
         width: chessboard.width / 1.5

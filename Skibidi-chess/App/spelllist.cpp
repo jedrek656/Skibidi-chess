@@ -1,5 +1,6 @@
 #include "spelllist.h"
 #include <QDebug>
+#include "game.h"
 
 SpellList::SpellList(QObject *parent)
     : QAbstractListModel{parent}
@@ -70,6 +71,11 @@ void SpellList::clearList()
     endResetModel();
 }
 
+void SpellList::setGame(Game *newGame)
+{
+    game = newGame;
+}
+
 int SpellList::getActiveSpell() const
 {
     return activeSpell;
@@ -77,9 +83,18 @@ int SpellList::getActiveSpell() const
 
 void SpellList::castSpell(int posX, int posY)
 {
-    beginInsertRows(QModelIndex(), rowCount(), rowCount());
-    this->spells.push_back(std::make_unique<Spell>(posX, posY, this->activeSpell));
-    endInsertRows();
+    int cost = 1;
+
+    bool currPlayer = game->checkTurn();
+    if (game->getCurrPlayerMana() >= cost){
+        beginInsertRows(QModelIndex(), rowCount(), rowCount());
+        this->spells.push_back(std::make_unique<Spell>(posX, posY, this->activeSpell));
+        endInsertRows();
+        game->decreaseCurrPlayerMana(cost);
+        emit game->updateMana();
+    }
+    this->activeSpell = -1;
+    emit hideSpells();
 }
 
 std::vector<std::unique_ptr<Spell>>* SpellList::getSpells()

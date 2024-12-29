@@ -25,14 +25,23 @@ void Game::setChessboard(ChessBoard *chessboard){
     this->chessboard = chessboard;
 }
 
+void Game::decreaseCurrPlayerMana(int cost)
+{
+    if (this->checkTurn()){
+        player1->subtractMana(cost);
+        return;
+    }
+    player2->subtractMana(cost);
+}
+
 void Game::changeTurn() {
-    this->turn = !this->turn;
     if (turn){
         player1->addMana();
     }
     else{
         player2->addMana();
     }
+    this->turn = !this->turn;
     emit updateMana();
 }
 

@@ -5,6 +5,8 @@
 #include <QAbstractListModel>
 #include "spell.h"
 
+class Game;
+
 using vecIterator = std::vector<std::unique_ptr<Spell>>::iterator;
 
 class SpellList : public QAbstractListModel
@@ -25,6 +27,8 @@ public:
     QHash<int, QByteArray> roleNames() const override;
     /**/
 
+    void setGame(Game *newGame);
+
 public slots:
     void updateLifespans();
     void setActiveSpell(int newActiveSpell);
@@ -35,6 +39,7 @@ public slots:
 
 signals:
     void activeSpellChanged(int index);
+    void hideSpells();
 
 private:
     std::vector <std::unique_ptr<Spell>> spells;
@@ -46,6 +51,8 @@ private:
 
     template <typename T>
     void addItem(int posX, int posY);
+
+    Game* game;
 };
 
 #endif // SPELLLIST_H
