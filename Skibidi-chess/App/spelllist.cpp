@@ -71,6 +71,21 @@ void SpellList::clearList()
     endResetModel();
 }
 
+int SpellList::getCurrSpellCost()
+{
+    Q_ASSERT(this->activeSpell != -1);
+    switch(this->activeSpell){
+    case Spells::Asbestos:
+        return 3;
+    case Spells::CheeseDrippy:
+        return 3;
+    case Spells::HawkTuah:
+        return 3;
+    }
+
+    return 0;
+}
+
 void SpellList::setGame(Game *newGame)
 {
     game = newGame;
@@ -83,7 +98,7 @@ int SpellList::getActiveSpell() const
 
 void SpellList::castSpell(int posX, int posY)
 {
-    int cost = 1;
+    int cost = this->getCurrSpellCost();
 
     bool currPlayer = game->checkTurn();
     if (game->getCurrPlayerMana() >= cost){

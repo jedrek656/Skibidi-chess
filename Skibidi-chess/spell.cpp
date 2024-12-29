@@ -5,11 +5,11 @@
 Spell::Spell(int posX, int posY, int spellIdx) {
     this->posX = posX;
     this->posY = posY;
-    this->lifespan = 4;
+    this->lifespan = 3;
     switch(spellIdx){
     case 0:
         this->name = "Hawk Tuah";
-        this->lifespan = 2;
+        this->lifespan = 1;
         break;
     case 1:
         this->name = "Asbestos";

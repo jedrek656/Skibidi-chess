@@ -19,6 +19,13 @@ public:
         PosYRole,
         LifespanRole,
     };
+
+    enum Spells {
+        HawkTuah = 0,
+        Asbestos,
+        CheeseDrippy,
+    };
+
     explicit SpellList(QObject *parent = nullptr);
 
     /* REQUIRED METHODS FOR QABSTRACT LIST */
@@ -51,6 +58,8 @@ private:
 
     template <typename T>
     void addItem(int posX, int posY);
+
+    int getCurrSpellCost();
 
     Game* game;
 };
