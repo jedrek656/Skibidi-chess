@@ -100,7 +100,6 @@ void SpellList::castSpell(int posX, int posY)
 {
     int cost = this->getCurrSpellCost();
 
-    bool currPlayer = game->checkTurn();
     if (game->getCurrPlayerMana() >= cost){
         beginInsertRows(QModelIndex(), rowCount(), rowCount());
         this->spells.push_back(std::make_unique<Spell>(posX, posY, this->activeSpell));
