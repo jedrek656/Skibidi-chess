@@ -21,6 +21,7 @@ public slots:
     bool checkTurn();
     void changeTurn();
     void pauseGame();
+    void openSettings();
 
 
     void openSaveDialog();
@@ -31,6 +32,7 @@ public slots:
 
 signals:
     void gamePaused();
+    void menuPaused();
     void updateMana();
 
 private:

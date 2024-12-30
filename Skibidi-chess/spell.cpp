@@ -44,3 +44,8 @@ std::pair<int, int> Spell::getPos() const
 {
     return {this->posX, this->posY};
 }
+
+void Spell::changeLifespan(int life)
+{
+    this->lifespan = life;
+}

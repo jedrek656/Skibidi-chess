@@ -13,6 +13,11 @@ int Player::getMana() const {
     return this->mana;
 }
 
+void Player::assignMana(int new_mana){
+    Q_ASSERT(MAX_MANA >= new_mana);
+    this->mana = new_mana;
+}
+
 void Player::subtractMana(int spell_cost) {
     Q_ASSERT(this->mana >= spell_cost);
     this->mana -= spell_cost;

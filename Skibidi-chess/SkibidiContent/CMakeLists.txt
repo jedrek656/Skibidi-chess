@@ -28,6 +28,7 @@ qt6_add_qml_module(SkibidiContent
                 "SpellOnBoard.qml"
                 "HawkTuah.qml"
                 "PossibleSpellCircle.qml"
+                "MainMenuSettings.qml"
 
 
 	RESOURCES

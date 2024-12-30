@@ -35,11 +35,11 @@ public:
     /**/
 
     void setSpellList(SpellList* spellist);
+    SpellList *getSpellList() const;
     friend std::ostream &operator<<(std::ostream &out, const ChessBoard &board);
     friend std::istream &operator>>(std::istream &in, ChessBoard &board);
 
     void clearList();
-
 
 public slots:
     std::vector<std::vector<int>> getPossibleMoves(int index);
@@ -71,13 +71,11 @@ private:
     int enPassantX = -1;
     std::vector <std::unique_ptr<ChessPiece>> pieces;
     void removeItem(int idx);
-
+    SpellList *spellList;
 
     template <typename T>
     void addItem(int posX, int posY, bool isWhite);
     void loadDefaultPosition();
-
-    SpellList *spellList;
 
 };
 

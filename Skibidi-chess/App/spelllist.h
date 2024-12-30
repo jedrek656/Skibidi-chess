@@ -42,6 +42,7 @@ public slots:
     int getActiveSpell() const;
 
     void castSpell(int posX, int posY);
+    void addSpellDirectly(const QString &name, int posX, int posY, int lifespan);
     std::vector <std::unique_ptr<Spell>> *getSpells();
 
 signals:

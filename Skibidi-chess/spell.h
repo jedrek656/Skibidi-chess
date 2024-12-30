@@ -12,6 +12,7 @@ public:
     virtual bool isFieldAffected(int posX, int posY) const;
     QVariantList getSpell() const;
     std::pair<int, int> getPos() const;
+    void changeLifespan(int life);
 
 
 protected:

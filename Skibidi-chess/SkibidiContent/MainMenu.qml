@@ -89,6 +89,7 @@ Rectangle {
                 radius: 10
             }
             palette.buttonText: hovered ? root.activeTextColor : "white"
+            onClicked: GameObj.openLoadDialog()
         }
 
         Button {
@@ -102,7 +103,7 @@ Rectangle {
                 radius: 10
             }
             palette.buttonText: hovered ? root.activeTextColor : "white"
-            //onClicked: {GameObj.changeBoard(); quitButton.text = ChessboardObj.getNumOfPieces()}
+            onClicked: GameObj.openSettings()
         }
 
         Button {
@@ -129,7 +130,7 @@ Rectangle {
         anchors.bottomMargin: parent.height*0.0185
         font.pixelSize: parent.height*0.023
         color:"gray"
-        text: qsTr("PlaceHolder")
+        text: qsTr("Przegrałem w grę")
     }
 
     Connections{
