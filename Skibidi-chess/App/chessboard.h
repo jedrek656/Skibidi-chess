@@ -40,7 +40,6 @@ public:
 
     void clearList();
 
-
 public slots:
     std::vector<std::vector<int>> getPossibleMoves(int index);
     void movePiece(int idx, int newPosX, int newPosY);
