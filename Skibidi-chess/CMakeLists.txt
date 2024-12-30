@@ -4,6 +4,9 @@ cmake_minimum_required(VERSION 3.21.1)
 option(LINK_INSIGHT "Link Qt Insight Tracker library" ON)
 option(BUILD_QDS_COMPONENTS "Build design studio components" ON)
 
+
+
+
 project(SkibidiApp LANGUAGES CXX)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}" "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
@@ -39,6 +42,9 @@ qt_add_executable(${CMAKE_PROJECT_NAME}
     App/player.h App/player.cpp
     uml2.qmodel
     App/dummypiece.h App/dummypiece.cpp
+    tst_rghsdrg.cpp
+
+
 
 )
 qt_add_resources(${CMAKE_PROJECT_NAME} "configuration"

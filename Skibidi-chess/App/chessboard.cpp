@@ -365,15 +365,27 @@ void ChessBoard::addItem(int posX, int posY, bool isWhite)
 std::vector<std::vector<int>> ChessBoard::getPossibleMoves(int index)
 {
     int oldSize = this->pieces.size();
+
     bool asbestoAffected = false;
+    std::vector<std::pair<int, int>> hawkTuahAffected;
 
     for (auto& spell: *this->spellList->getSpells()){
         if(spell->getSpell()[0] == "Cheese Drippy"){
             auto spellPos = spell->getPos();
             this->pieces.push_back(std::make_unique<DummyPiece>(spellPos.first, spellPos.second, pieces[index]->getIsWhite()));
         }
+        if(spell->getSpell()[0] == "Hawk Tuah"){
+            auto spellPos = spell->getPos();
+            hawkTuahAffected.push_back(spellPos);
+        }
+        if(spell->getSpell()[0] == "Asbestos"){
+            auto spellPos = spell->getPos();
+            if (spellPos.first == this->pieces[index]->getPosX() && spellPos.second == this->pieces[index]->getPosY()){
+                asbestoAffected = true;
+            }
+        }
     }
-    auto moves = pieces[index]->getPossibleMoves(this->pieces, enPassantX);
+    auto moves = this->pieces[index]->getPossibleMoves(this->pieces, enPassantX);
     this->pieces.erase(std::remove_if(pieces.begin(),
                                       pieces.end(),
                                       [&](const std::unique_ptr<ChessPiece> &piece){
@@ -381,6 +393,16 @@ std::vector<std::vector<int>> ChessBoard::getPossibleMoves(int index)
                                       }),
                                       pieces.end());
     Q_ASSERT(this->pieces.size() == oldSize);
+
+    //HAWK TUAH SPELL
+    moves.erase(std::remove_if(moves.begin(),
+                                      moves.end(),
+                                      [&](const std::vector<int> &move){
+                                          return std::find(hawkTuahAffected.begin(),
+                                                 hawkTuahAffected.end(),
+                                                 std::pair<int,int>{move[0], move[1]}) != hawkTuahAffected.end();
+                                      }),
+                       moves.end());
 
     //ASBESTO SPELL
     /*srand(index);
@@ -390,5 +412,6 @@ std::vector<std::vector<int>> ChessBoard::getPossibleMoves(int index)
                                       return (rand()%100) >= 80;
                                       }),
                        moves.end());*/
+
     return moves;
 }

@@ -18,6 +18,7 @@ Item {
             property int idx1: index
             model: 8
             Rectangle {
+
                 required property int index
                 width: root.width / 8
                 height: root.height / 8
