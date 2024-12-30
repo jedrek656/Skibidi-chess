@@ -347,6 +347,11 @@ void ChessBoard::removeItem(int idx)
     endRemoveRows();
 }
 
+SpellList *ChessBoard::getSpellList() const
+{
+    return spellList;
+}
+
 void ChessBoard::clearList()
 {
     beginResetModel();

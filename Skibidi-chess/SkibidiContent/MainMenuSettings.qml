@@ -33,23 +33,22 @@ Item {
 
         Text {
             id: sliderLabel
-            width: root.width / 3
-            height: root.height / 8
+            width: root.width / 2
+            height: root.height / 6
             anchors.horizontalCenter: parent.horizontalCenter
             horizontalAlignment: Text.AlignHCenter
-            font.pointSize: 50
+            font.pointSize: 70
             minimumPointSize: 10
             fontSizeMode: Text.Fit
-            y: root.height / 4.3
+            y: root.height / 3
             color: "#ffffff"
             text: qsTr("VOLUME")
             font.family: "Verdana"
-            font.bold: false
         }
 
         Slider{
             anchors.horizontalCenter: parent.horizontalCenter
-            y: root.height / 3.5
+            y: root.height / 2.25
             width: root.width / 2.8
             height: root.height / 10
 
@@ -57,52 +56,10 @@ Item {
 
         Button {
             id: button
-            x: root.width/3
-            y: root.height/2.5
-            width: root.width/3
-            height: root.height/10
-            text: qsTr("LOAD")
-            font.pixelSize: 80
-            font.family: "Verdana"
-            icon.color: "#27262a"
-
-            onClicked: GameObj.openLoadDialog();
-        }
-
-        Button {
-            id: button2
-            x: root.width/3
-            y: root.height/2.5 + root.height/7
-            width: root.width/3
-            height: root.height/10
-            text: qsTr("SAVE")
-            font.pixelSize: 80
-            font.family: "Verdana"
-            icon.color: "#27262a"
-
-            onClicked: GameObj.openSaveDialog();
-        }
-
-        Button {
-            id: button3
-            x: root.width/3
-            y: root.height/2.5 + root.height/3.5
-            width: root.width/3
-            height: root.height/10
-            text: qsTr("EXIT")
-            font.pixelSize: 80
-            font.family: "Verdana"
-            icon.color: "#27262a"
-
-            onClicked: GameObj.closeApp();
-        }
-
-        Button {
-            id: button4
-            x: root.width/3
-            y: root.height/2.5 + root.height/2.35
+            x: root.width / 3
+            y: root.height / 1.5
             width: root.width / 3
-            height: root.height / 10
+            height: root.height / 8
             text: qsTr("BACK")
             font.pixelSize: 80
             font.family: "Verdana"
@@ -113,6 +70,6 @@ Item {
 
     Connections{
         target: GameObj;
-        onGamePaused: root.visible = !root.visible;
+        onMenuPaused: root.visible = !root.visible;
     }
 }

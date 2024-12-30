@@ -138,4 +138,13 @@ Rectangle {
         y: 0
         visible: true
     }
+
+    MainMenuSettings
+    {
+        id: mainMenuSettings
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
+        width: 800
+        height: 1000
+    }
 }

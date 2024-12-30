@@ -50,6 +50,10 @@ void Game::pauseGame()
     emit gamePaused();
 }
 
+void Game::openSettings() {
+    emit menuPaused();
+}
+
 bool Game::checkTurn() {
     return this->turn;
 }
@@ -59,7 +63,16 @@ void Game::saveFile(QString path)
     std::ofstream file;
     file.open(path.toStdString(), std::ofstream::out | std::ofstream::trunc);
     Q_ASSERT(file.is_open());
-    //file << *this;
+    file << this->turn << "\n";
+    file << this->player1->getMana() << "\n";
+    file << this->player2->getMana() << "\n";
+    file << this->chessboard->getSpellList()->getSpells()->size() << "\n";
+    for (auto& spell: *this->chessboard->getSpellList()->getSpells()){
+        for(int i=0; i<4; ++i)
+        {
+            file << spell->getSpell()[i].toString().toStdString() << "\n";
+        }
+    }
     file << *this->chessboard;
     file.close();
 }
@@ -70,10 +83,25 @@ void Game::loadFile(QString path)
     file.open(path.toStdString(), std::ofstream::in);
     Q_ASSERT(file.is_open());
     chessboard->clearList();
-
+    int mana, spells;
+    file >> this->turn;
+    file >> mana;
+    this->player1->assignMana(mana);
+    file >> mana;
+    this->player2->assignMana(mana);
+    file >> spells;
+    for (int i=0; i<spells; ++i){
+        std::string name;
+        int posX, posY, lifespan;
+        std::getline(file, name);
+        std::getline(file, name);
+        file >> posX >> posY >> lifespan;
+        this->chessboard->getSpellList()->addSpellDirectly(QString::fromStdString(name), posX, posY, lifespan);
+    }
     file >> *this->chessboard;
     file.close();
     emit chessboard->chessboardLoaded();
+    emit updateMana();
 }
 
 void Game::openSaveDialog() {
