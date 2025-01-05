@@ -1,0 +1,3 @@
+[submodule "Skibidi-chess/Skibidi-chess/external/googletest"]
+	path = Skibidi-chess/Skibidi-chess/external/googletest
+	url = https://github.com/google/googletest.git
