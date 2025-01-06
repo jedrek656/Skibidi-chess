@@ -13,6 +13,7 @@ class Game : public QObject
 public:
     explicit Game(QObject *parent = nullptr, ChessBoard *chessboard = nullptr);
     void setChessboard(ChessBoard *chessboard);
+    ChessBoard *getChessboard() const;
 
     void decreaseCurrPlayerMana(int cost);
 

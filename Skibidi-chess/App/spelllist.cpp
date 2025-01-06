@@ -113,7 +113,9 @@ void SpellList::castSpell(int posX, int posY)
 
 void SpellList::addSpellDirectly(const QString &name, int posX, int posY, int lifespan)
 {
+    qDebug() << "this pointer:" << this;
     int spellIdx = -1;
+
     if (name == "Hawk Tuah") {
         spellIdx = Spells::HawkTuah;
     } else if (name == "Asbestos") {
@@ -126,6 +128,8 @@ void SpellList::addSpellDirectly(const QString &name, int posX, int posY, int li
         qWarning() << "Invalid spell name provided:" << name;
         return;
     }
+
+    qDebug() << this->spells.size();
 
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
     auto spell = std::make_unique<Spell>(posX, posY, spellIdx);

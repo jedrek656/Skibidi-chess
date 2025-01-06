@@ -25,6 +25,11 @@ void Game::setChessboard(ChessBoard *chessboard){
     this->chessboard = chessboard;
 }
 
+ChessBoard *Game::getChessboard() const
+{
+    return this->chessboard;
+}
+
 void Game::decreaseCurrPlayerMana(int cost)
 {
     if (this->checkTurn()){
