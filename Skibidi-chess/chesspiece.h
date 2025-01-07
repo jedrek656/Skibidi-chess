@@ -9,16 +9,18 @@ using possibleMoves = std::vector<std::vector<int>>;
 
 class ChessPiece
 {
-protected:
-    using piecesVector = std::vector<std::unique_ptr<ChessPiece>>;
-    enum moveType{
-    move = 0,
-    capture = 1,
-    enpassan = 2,
-    castling = 3
-};
+
 
 public:
+
+    using piecesVector = std::vector<std::unique_ptr<ChessPiece>>;
+    enum moveType{
+        move = 0,
+        capture = 1,
+        enpassan = 2,
+        castling = 3
+    };
+
     ChessPiece(int posX, int posY, bool isWhite);
     virtual QVariantList getPieceData() const;
     virtual void moveTo(int newPosX, int newPosY);
@@ -32,7 +34,6 @@ public:
     operator QString() const;
     friend std::ostream &operator<<(std::ostream &out, const ChessPiece &piece);
     friend std::istream &operator>>(std::istream &in, ChessPiece &piece);
-
 
 protected:
     QString name;

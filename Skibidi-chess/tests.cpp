@@ -2,6 +2,14 @@
 #include "spell.h"
 #include "App/game.h"
 #include "App/chessboard.h"
+#include "queen.h"
+#include "pawn.h"
+#include "knight.h"
+#include "rook.h"
+#include "bishop.h"
+#include "king.h"
+#include "chesspiece.h"
+#include <algorithm>
 
 Game *prepareGame(){
     auto game = new Game;
@@ -51,5 +59,44 @@ TEST(chessboard, possibleMoves1)
     chessBoard->movePiece(13, 4, 4);
     chessBoard->movePiece(6, 4, 3);     //E4, E5, CHECK IF E4 PAWN CANT MOVE
     ASSERT_EQ(chessBoard->getPossibleMoves(13).size(), 0);
+    freeMem(game);
+}
+
+TEST(chessboard, possibleMoves2)
+{
+    Game *game = prepareGame();
+    ChessBoard *chessBoard = game->getChessboard();
+
+    chessBoard->addItem<Queen>(3, 4, true);
+    chessBoard->addItem<Pawn>(2, 4, true);
+    chessBoard->addItem<Pawn>(3, 5, true);
+    chessBoard->addItem<Pawn>(4, 4, true);
+    chessBoard->addItem<Knight>(4, 3, true);
+    chessBoard->addItem<Bishop>(1, 6, false);
+    chessBoard->addItem<Rook>(6, 7, false);
+    chessBoard->addItem<King>(3, 1, false);
+
+    auto moves = chessBoard->getPossibleMoves(0);
+
+    std::vector<std::vector<int>> correctMoves = {{0, 1, ChessPiece::moveType::move},
+                                                  {1, 2, ChessPiece::moveType::move},
+                                                  {2, 3, ChessPiece::moveType::move},
+
+                                                  {1, 6, ChessPiece::moveType::capture},
+                                                  {2, 5, ChessPiece::moveType::move},
+
+                                                  {4, 5, ChessPiece::moveType::move},
+                                                  {5, 6, ChessPiece::moveType::move},
+                                                  {6, 7, ChessPiece::moveType::capture},
+
+                                                  {3, 3, ChessPiece::moveType::move},
+                                                  {3, 2, ChessPiece::moveType::move},
+                                                  {3, 1, ChessPiece::moveType::capture}};
+
+    for(auto move: moves){
+        ASSERT_TRUE(std::find(correctMoves.begin(), correctMoves.end(), move) != correctMoves.end());
+    }
+
+    ASSERT_EQ(chessBoard->getPossibleMoves(0).size(), 11);
     freeMem(game);
 }

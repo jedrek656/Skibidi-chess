@@ -41,6 +41,9 @@ public:
 
     void clearList();
 
+    template <typename T>
+    void addItem(int posX, int posY, bool isWhite);
+
 public slots:
     std::vector<std::vector<int>> getPossibleMoves(int index);
     void movePiece(int idx, int newPosX, int newPosY);
@@ -73,8 +76,6 @@ private:
     void removeItem(int idx);
     SpellList *spellList;
 
-    template <typename T>
-    void addItem(int posX, int posY, bool isWhite);
     void loadDefaultPosition();
 
 };
