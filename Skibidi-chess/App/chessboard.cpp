@@ -156,6 +156,7 @@ void ChessBoard::capturePiece(int pieceIdx, int newPosX, int newPosY)
     int toDelIdx = -1;
     int tmpIdx = 0;
     QString toDelName = "";
+    QString delName = pieces[pieceIdx]->getName();
     bool toDelIsWhite = true;
     for(auto&& piece: pieces){
         if(piece->getPosX() == newPosX && piece->getPosY() == newPosY){
@@ -166,7 +167,6 @@ void ChessBoard::capturePiece(int pieceIdx, int newPosX, int newPosY)
         };
         ++tmpIdx;
     }
-
     Q_ASSERT(toDelIdx != -1);
     this->pieces[pieceIdx]->moveTo(newPosX, newPosY);
     emit dataChanged(this->index(pieceIdx), this->index(pieceIdx), {ItemRoles::PosXRole, ItemRoles::PosYRole});
@@ -181,7 +181,7 @@ void ChessBoard::capturePiece(int pieceIdx, int newPosX, int newPosY)
             return;
         }
     }
-    if (pieces[pieceIdx]->getName() == "Pawn") {
+    if (delName == "Pawn") {
         if (newPosY == 0 && pieces[pieceIdx]->getIsWhite()){
             emit promotionDialog(pieceIdx, true);
             return;
