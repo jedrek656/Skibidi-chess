@@ -7,16 +7,16 @@ Welcome to the **Chess Game with Skibidi Toilets and Spells**, a creative twist 
 ## Features 🚀  
 
 ### 1. **Classic Chess Gameplay**  
-- Enjoy the standard rules and mechanics of chess with an intuitive and polished interface.  
+- Enjoy the standard rules and mechanics of chess with an intuitive and polished interface.   
 
-### 2. **Skibidi Toilets Integration**  
-- Introducing the mischievous *Skibidi Toilets* as unique entities in the game that bring chaos and surprise to your matches.  
+### 2. **Magical Spells**  
+- Cast the spells in right time to get the tactical advantage. Spells description is availavle when you hover over them.  
 
-### 3. **Magical Spells**  
-- Spells like *Hawk Tuah* (for sharp tactical maneuvers) and *Asbestos* (defensive fortifications) are integrated to enhance gameplay. Cast spells strategically to outwit your opponent!  
+### 3. **Modern UI**  
+- Built using **QML** for a visually stunning and responsive user interface. 
 
-### 4. **Modern UI**  
-- Built using **QML** for a visually stunning and responsive user interface.  
+### 4. **Save position system**  
+- Want to finish your game later? The game includes the save/load position system. 
 
 ---
 
@@ -50,8 +50,8 @@ Welcome to the **Chess Game with Skibidi Toilets and Spells**, a creative twist 
 - **Standard Chess**: Play chess as you know it, but...  
 - **With skibidi toilets & spells**:  
   - **Skibidi Toilets** appear on the board instead of regular chess pieces, altering visuals of the game.  
-  - Use *Hawk Tuah* to unleash tactical advantages.  
-  - Deploy *Asbestos* to protect your king or key pieces.  
+  - Use spells to unleash tactical advantages.  
+- You can press red rectangle to play Subway Surfers video in case you get bored.
 
 ---
 
